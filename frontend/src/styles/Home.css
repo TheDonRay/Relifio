@@ -1,0 +1,40 @@
+/* Parent container should take full screen height */
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+/* Make the parent a flex container */
+body {
+    display: flex;
+    justify-content: center; /* centers left-right */
+    align-items: center;     /* centers up-down */
+}
+
+/* Your container */
+.container1 {
+    width: 50%;
+    margin-top: 0; /* remove since flex handles centering */
+}
+
+/* Title styling */
+.title { 
+    color: rgb(0, 0, 0); 
+    text-align: center; 
+}
+
+/* Individual character blur animation */
+.title span {
+    display: inline-block;
+    filter: blur(8px);
+    animation: clearBlur 0.6s forwards;
+}
+
+@keyframes clearBlur {
+    0% {
+        filter: blur(8px);
+    }
+    100% {
+        filter: blur(0px);
+    }
+}
