@@ -20,5 +20,5 @@ app.get('/', (req, res) => {
 app.use('/api/', signupRoute); 
 
 app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
+    console.log(`Server is Successfully running on the following localhost: http://localhost:${PORT}`);
 });
