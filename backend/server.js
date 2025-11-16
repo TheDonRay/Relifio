@@ -1,7 +1,8 @@
 const express = require('express'); 
 const app = express(); 
+require('dotenv').config();  
 
-require('dotenv').config(); 
+//import routes here as such 
 
 // set up middleware 
 app.use(express.json()); 
