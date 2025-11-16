@@ -1,11 +1,11 @@
-import './App.css'; 
-//import the componenets here as such 
-import Homepage from './components/Homepage.jsx';
+import "./App.css";
+//import the componenets here as such
+import Homepage from "./components/Homepage.jsx";
 
 function App() {
   return (
-    <> 
-      <Homepage/>
+    <>
+      <Homepage />
     </>
   );
 }
