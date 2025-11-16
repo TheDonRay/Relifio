@@ -1,72 +1,149 @@
-/* You can keep this simple now */
+/* ============ Global ============ */
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: "Plus Jakarta Sans", sans-serif;
+  background: #f7f9fc;
 }
 
-/* Full-screen flex wrapper that centers everything */
+/* ============ Layout ============ */
 .home-wrapper {
-  min-height: 100vh; /* full viewport height */
+  min-height: 100vh;           /* full viewport height */
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
+  justify-content: center;     /* horizontal center */
+  align-items: center;         /* vertical center */
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Your centered content box */
 .container1 {
   width: 50%;
+  max-width: 800px;
   text-align: center;
 }
 
-/* Title styling */
+/* ============ Title & Paragraph ============ */
 .title {
-  color: rgb(0, 0, 0);
+  color: #000000;
   word-spacing: 2px;
-} 
-
-.paragraph-style{ 
-    word-spacing: 2px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-/* Buttons row */
+.paragraph-style {
+  word-spacing: 2px;
+  white-space: normal;       /* ensures wrapping */
+  overflow-wrap: break-word; /* prevents long words from breaking layout */
+  word-break: break-word;    /* forces wrap inside long spans */
+  display: block;  
+}
+
+/* Each character span created in JS */
+.letter-animate {
+  display: inline-block;
+  filter: blur(8px);
+  opacity: 0;
+  animation: clearBlur 0.7s forwards; 
+  white-space: pre-wrap;  /* preserves spacing */
+}
+
+/* Blur → clear animation */
+@keyframes clearBlur {
+  0% {
+    filter: blur(8px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+/* ============ Buttons ============ */
 .buttons-row {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-.btn1, .btn2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+.btn1,
+.btn2 {
+  font-family: inherit;
   display: inline-block;
   border-radius: 10px;
   border: none;
   background: #1875ff;
   color: white;
-  font-family: inherit;
   text-align: center;
   font-size: 13px;
   box-shadow: 0px 14px 56px -11px #1875ff;
   width: 12em;
   padding: 1em;
-  cursor: pointer; 
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-/* Individual character blur animation */
-.title span {
+/* Button text span (for arrow animation) */
+.btn1 span,
+.btn2 span {
+  cursor: pointer;
   display: inline-block;
-  filter: blur(8px);
-  animation: clearBlur 2s forwards;
+  position: relative;
+  transition: 0.4s;
 }
 
-@keyframes clearBlur {
-  0% {
-    filter: blur(8px);
+/* Arrow that appears on hover */
+.btn1 span::after,
+.btn2 span::after {
+  content: "→";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -18px;
+  transition: 0.4s;
+  font-weight: 600;
+}
+
+/* Hover effects */
+.btn1:hover,
+.btn2:hover {
+  background: #0f63dd;
+  box-shadow: 0px 18px 60px -15px #1875ff;
+  transform: translateY(-2px);
+}
+
+.btn1:hover span,
+.btn2:hover span {
+  padding-right: 2.2em;
+}
+
+.btn1:hover span::after,
+.btn2:hover span::after {
+  opacity: 1;
+  right: 0;
+}
+
+/* ============ Responsive tweaks ============ */
+@media (max-width: 768px) {
+  .container1 {
+    width: 85%;
   }
-  100% {
-    filter: blur(0px);
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .buttons-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn1,
+  .btn2 {
+    width: 100%;
   }
 }
