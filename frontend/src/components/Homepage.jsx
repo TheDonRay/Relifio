@@ -26,7 +26,12 @@ export default function Home() {
     <div className="home-wrapper">
       <div className="container1">
         <h1 className="title" ref={titleRef}></h1>
-        <p className="paragraph-style">Relifio is more than an AI companion. It turns your thoughts and emotions into digital chapters you can revisit anytime. Whether it’s a memory, a story, or a difficult feeling, Relifio gives you a safe space to talk through it — no pressure, no judgment, just support.</p>
+        <p className="paragraph-style">
+          Relifio is more than an AI companion. It turns your thoughts and
+          emotions into digital chapters you can revisit anytime. Whether it’s a
+          memory, a story, or a difficult feeling, Relifio gives you a safe
+          space to talk through it — no pressure, no judgment, just support.
+        </p>
 
         <div className="buttons-row">
           <button className="btn1">Learn More</button>
