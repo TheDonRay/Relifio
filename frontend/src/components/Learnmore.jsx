@@ -7,7 +7,16 @@ export default function LearnMore() {
   return (
     <>
       <div>
-        <h1>Learn More page - basically describe the story with Relifio</h1>
+        <div className="part1">
+          <h1>General about Relifio</h1>
+        </div>
+
+        <div className="part2">
+          <h1>Motivation of this project</h1> 
+          <p>The reason we built this.. </p>
+        </div> 
+
+        <div></div>
       </div>
     </>
   );
