@@ -6,7 +6,8 @@ require("../styles/Learnmore.css");
 // set up mongoDB database for this one to store signed up emails from people.
 export default function LearnMore() {
   const [data, setData] = useState(null);
-
+ 
+  //TODO: Chnage the fetch to update to a POST logic to send data to the mongoDB cluster 
   useEffect(() => {
     // create the function to hold the data here as such
     const fetchUserData = async () => {
@@ -34,7 +35,7 @@ export default function LearnMore() {
       <div>
         <div className="part1">
           <h1>General about Relifio</h1> 
-          <p1>{data?.message}</p1>
+          <p>{data?.message}</p>
         </div>
 
         <div className="part2">
