@@ -37,15 +37,15 @@ export default function Home() {
   }, []);
 
   // later set upo the button use navigates
-  // intialize button functions herer as such 
-  // learn more button function here 
+  // intialize button functions herer as such
+  // learn more button function here
   function buttonNav1() {
     navigate("/Learnmore");
-  } 
- 
+  }
+
   // second function for navigation to buttnav2
-  function buttonNav2() { 
-    navigate("/Mainpage"); 
+  function buttonNav2() {
+    navigate("/Mainpage");
   }
 
   return (

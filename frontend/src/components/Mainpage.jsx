@@ -1,10 +1,6 @@
-import react from 'react'; 
-//MainPage that will run the api etc 
+import React from "react";
+//MainPage that will run the api etc
 
-
-export default function MainPage() { 
-
-    return( 
-        <h1>Main Page for Relifio</h1>
-    ); 
+export default function MainPage() {
+  return <h1>Main Page for Relifio</h1>;
 }
