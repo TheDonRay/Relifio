@@ -1,4 +1,5 @@
-import react from "react";  
+import react from "react";   
+import { useState, useEffect } from 'react'; 
 
 
 // set up basic stuff here
@@ -16,7 +17,9 @@ export default function LearnMore() {
           <p>The reason we built this.. </p>
         </div> 
 
-        <div></div>
+        <div className="signup for updates">
+          <h1>Sign up page</h1>
+        </div>
       </div>
     </>
   );
