@@ -1,6 +1,6 @@
 import react from "react";   
 import { useState, useEffect } from 'react'; 
-
+require('../styles/Learnmore.css'); 
 
 // set up basic stuff here
 // set up mongoDB database for this one to store signed up emails from people.
