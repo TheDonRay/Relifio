@@ -30,7 +30,8 @@ export default function LearnMore() {
     // below here we are just going to invoke the function as such
     fetchUserData();
   }, []);
-  return (
+  return ( 
+    //TODO: Change to be like one centered DIV instead of seperate divs which might confuse and make it harder. 
     <>
       <div>
         <div className="part1">
