@@ -1,16 +1,21 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const cors = require("cors");
-require("dotenv").config();
+const cors = require("cors"); 
+const bodyparser = require('body-parser');
+
+
+// set up middleware 
+app.use(bodyparser.json()); 
+app.use(express.json());
+app.use(cors()); // for frontend etc. 
 
 //import routes here as such
 const signupRoute = require("./routes/signedup.js");
 // import the route here as such
 const APIcall = require("./routes/api.js");
 
-// set up middleware
-app.use(express.json());
-app.use(cors()); // for frontend etc.
+
 
 const PORT = process.env.PORT;
 
