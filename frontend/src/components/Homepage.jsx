@@ -30,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const titleText = "Where technology meets empathy.";
     const paragraphText =
-      "Relifio is more than an AI companion, it turns your thoughts and emotions into digital chapters you can revisit anytime. Whether it’s a memory, a story, or a tough feeling, Relifio gives you a safe space to talk through it with no pressure and no judgment.";
+      "Your thoughts become chapters, Your chapters become the story of you.";
 
     animateText(titleRef.current, titleText);
     animateText(paragraphRef.current, paragraphText);
