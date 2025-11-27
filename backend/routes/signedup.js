@@ -1,8 +1,8 @@
 const express = require("express");
 const signupRoute = express.Router();
 
-//going to be a backend post request that will be sent to my database 
-//TODO: This route change it back to POST request since we are updating the data base with users interested 
+//going to be a backend post request that will be sent to my database
+//TODO: This route change it back to POST request since we are updating the data base with users interested
 
 signupRoute.get("/signup", (req, res) => {
   try {
