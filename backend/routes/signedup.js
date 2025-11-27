@@ -1,6 +1,7 @@
 const express = require("express");
 const signupRoute = express.Router(); 
-// import the database connection here 
+// import the database connection here  
+const dbConnection = require("../database/dbconnection.js");
 
 //going to be a backend post request that will be sent to my database
 //TODO: This route change it back to POST request since we are updating the data base with users interested
