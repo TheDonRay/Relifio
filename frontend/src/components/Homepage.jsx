@@ -21,7 +21,7 @@ export default function Home() {
       // keep spaces visible
       span.textContent = char === " " ? "\u00A0" : char;
 
-      span.style.animationDelay = `${index * 0.03}s`;
+      span.style.animationDelay = `${index * 0.06}s`;
       span.classList.add("letter-animate");
       element.appendChild(span);
     });

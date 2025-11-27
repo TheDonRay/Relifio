@@ -5,47 +5,48 @@ require("../styles/Learnmore.css");
 // set up basic stuff here
 // set up mongoDB database for this one to store signed up emails from people.
 export default function LearnMore() {
-  const [data, setData] = useState(null);
- 
-  //TODO: Chnage the fetch to update to a POST logic to send data to the mongoDB cluster 
+  // add email state
+  const [email, userEmail] = useState("");
+
   useEffect(() => {
-    // create the function to hold the data here as such
-    const fetchUserData = async () => {
-      // implement the try and catch case ehre as such
-      try {
-        const datares = await fetch("http://localhost:6700/api/signup", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json", // Optional, but good practice
-          },
-        });
-        const result = await datares.json();
-        // update the state here as such
-        setData(result);
-      } catch (error) { 
-        console.log('Error was found', error); 
-      }
-    };
-    // below here we are just going to invoke the function as such
-    fetchUserData();
-  }, []);
-  return ( 
-    //TODO: Change to be like one centered DIV instead of seperate divs which might confuse and make it harder. 
+    // add a check here as such
+    if (!email) return;
+
+    async function userSignup() {
+      const signupuser = await fetch("http://localhost:6700/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const result = await signupuser.json();
+      console.log("Server response", result);
+    }
+    userSignup();
+  }, [email]); // this ensures that this fetch only runs when the email is updated.
+
+  // TODO: Fix error that Im facing where when user types it presses sign up which is not what we want that causes database overload. 
+  return (
     <>
-      <div>
-        <div className="part1">
-          <h1>General about Relifio</h1> 
-          <p>{data?.message}</p>
+      <div className="container-div">
+        <div className="first-div">
+          <h1>What is Relifio?</h1> 
+          <p>Relifio is a </p>
         </div>
-
-        <div className="part2">
-          <h1>Motivation of this project</h1>
-          <p>The reason we built this.. </p>
+        <div className="second-div">
+          <h1>Why Relifio?</h1>
         </div>
+        <div className="third-div">
+          <h1>Sign Up To announce our official release!</h1>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => userEmail(e.target.value)} // this updates the state of the email which is essentially empty string right now
+          />
 
-        <div className="signup for updates">
-          <h1>Sign up page</h1>
+          <button onClick={() => userEmail(email)}>Sign Up</button>
         </div>
       </div>
     </>
