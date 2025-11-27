@@ -13,7 +13,7 @@ signupRoute.post("/signup", async (req, res) => {
     const { email } = req.body; 
     // console.log("Email recieved", email);  
     //TODO: need to add error handling etc 
-    const newSignup = signupSchema.create({email});
+    const newSignup = await signupSchema.create({email});
     res.status(200).json({
       success: "user has Signed up details sent to database",
       data: newSignup,

@@ -4,6 +4,9 @@ const app = express();
 const cors = require("cors"); 
 const bodyparser = require('body-parser');
 
+// call mongodb connection 
+const signupConnection = require("./database/signupdbconnection.js"); 
+signupConnection(); 
 
 // set up middleware 
 app.use(bodyparser.json()); 
