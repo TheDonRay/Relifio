@@ -9,7 +9,7 @@ require("../styles/Learnmore.css");
 export default function LearnMore() {
   // add email state
   const [email, userEmail] = useState(""); 
-  const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
+  // const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
   const userSignup = async () => { 
@@ -18,7 +18,7 @@ export default function LearnMore() {
       return; 
     } 
     try { 
-      const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, { 
+      const sendUserdata = await fetch("http://localhost:6700/api/signup", { 
         method: "POST", 
         headers: { 
           "Content-Type" : "application/json",
