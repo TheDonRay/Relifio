@@ -46,8 +46,20 @@ export default function LearnMore() {
           </p>
         </div>
         <div className="second-div">
-          <h1>Why Relifio?</h1>  
-          <p></p>
+          <h1>Why Relifio?</h1>
+          <p className="paragraph-text2">
+            Because reassurance matters. Even with friends and a supportive
+            family, there are moments when you still feel alone—and I’ve
+            experienced that firsthand. I often found myself turning to AI just
+            to express how I felt, whether through quick voice messages or chat.
+            That’s when I realized there was no platform designed to
+            meaningfully hold these moments. So I created Relifio: a place where
+            your thoughts are not only heard but also tracked, summarized, and
+            transformed into something you can reflect on. Self-reflection is
+            one of the biggest drivers of personal growth, and Relifio turns
+            those isolated moments of expression into a continuous journey of
+            understanding yourself.
+          </p>
         </div>
         <div className="third-div">
           <h1>Sign Up To announce our official release!</h1>
