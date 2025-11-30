@@ -9,24 +9,12 @@ const signupConnection = require("./database/signupdbconnection.js");
 signupConnection();
 
 // ----- CORS + middleware -----
-const allowedOrigins = [
-  "https://relifio.vercel.app", // your Vercel frontend
-];
+app.use(cors());              // allow all origins for now
+// app.options("*", cors());     // handle all preflight requests
 
 app.use(bodyparser.json());
 app.use(express.json());
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-
-// // handle preflight requests
-// app.options("*", cors());
-// // ------------------------------
+// ------------------------------
 
 // import routes
 const signupRoute = require("./routes/signedup.js");
@@ -40,7 +28,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// mount routes
 app.use("/api", signupRoute);
 app.use("/api", APIcall);
 
