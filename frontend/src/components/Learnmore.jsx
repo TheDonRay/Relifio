@@ -46,7 +46,8 @@ export default function LearnMore() {
           </p>
         </div>
         <div className="second-div">
-          <h1>Why Relifio?</h1> 
+          <h1>Why Relifio?</h1>  
+          <p></p>
         </div>
         <div className="third-div">
           <h1>Sign Up To announce our official release!</h1>
