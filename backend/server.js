@@ -5,8 +5,8 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 
 // call mongodb connection
-const signupConnection = require("./database/signupdbconnection.js");
-signupConnection();
+// const signupConnection = require("./database/signupdbconnection.js");
+// signupConnection();
 
 // ----- CORS + middleware -----
 app.use(cors());              // allow all origins for now
