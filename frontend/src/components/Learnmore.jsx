@@ -63,7 +63,8 @@ export default function LearnMore() {
         </div>
         <div className="third-div">
           <h1>Join the waitlist and let your chapters begin!</h1>
-          <input
+          <input 
+            className="inputbox"
             type="email"
             placeholder="Enter your email"
             value={email}
