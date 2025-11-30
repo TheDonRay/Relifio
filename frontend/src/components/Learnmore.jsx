@@ -8,24 +8,29 @@ export default function LearnMore() {
   // add email state
   const [email, userEmail] = useState("");
 
-  useEffect(() => {
-    // add a check here as such
-    if (!email) return;
-
-    async function userSignup() {
-      const signupuser = await fetch("http://localhost:6700/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
+  const userSignup = async () => { 
+    // base case 
+    if (!email) { 
+      return; 
+    } 
+    try { 
+      const sendUserdata = await fetch(' http://localhost:6700/api/signup', { 
+        method: "POST", 
+        headers: { 
+          "Content-Type" : "application/json",
+        }, 
         body: JSON.stringify({ email }),
-      });
-      const result = await signupuser.json();
-      console.log("Server response", result);
+      }); 
+      // set the result now 
+      const result = await sendUserdata.json(); 
+      console.log('User Signed up details:', result);  
+      // clear it once its sent to the backend here 
+      userEmail(""); 
+    } catch(error) {  
+      console.error('There was an error sending data to user', error); 
     }
-    userSignup();
-  }, [email]); // this ensures that this fetch only runs when the email is updated.
-
+  }; 
   // TODO: Fix error that Im facing where when user types it presses sign up which is not what we want that causes database overload.
   return (
     <>
@@ -70,8 +75,7 @@ export default function LearnMore() {
             value={email}
             onChange={(e) => userEmail(e.target.value)} // this updates the state of the email which is essentially empty string right now
           />
-
-          <button onClick={() => userEmail(email)}>Sign Up</button>
+          <button className="signupbtn" onClick={userSignup}>Sign Up</button>
         </div>
       </div>
     </>
