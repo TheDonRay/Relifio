@@ -26,16 +26,27 @@ export default function LearnMore() {
     userSignup();
   }, [email]); // this ensures that this fetch only runs when the email is updated.
 
-  // TODO: Fix error that Im facing where when user types it presses sign up which is not what we want that causes database overload. 
+  // TODO: Fix error that Im facing where when user types it presses sign up which is not what we want that causes database overload.
   return (
     <>
       <div className="container-div">
         <div className="first-div">
-          <h1>What is Relifio?</h1> 
-          <p>Relifio is a </p>
+          <h1>What is Relifio?</h1>
+          <p className="paragraph-text1">
+            Relifio is a mental wellness SaaS platform that provides on-demand
+            emotional support through AI-powered therapeutic conversations in a
+            safe, judgment-free space. Unlike traditional chatbots or journaling
+            apps, Relifio transforms each interaction into structured “life
+            chapters,” capturing challenges, breakthroughs, and milestones in a
+            meaningful emotional timeline. As a user, you can revisit these
+            chapters anytime to reflect on your growth—whether it’s an
+            achievement, a challenge, a breakup, or anything in between. Looking
+            back shows you just how far you’ve come, highlighting the growth
+            that often happens without you even noticing.
+          </p>
         </div>
         <div className="second-div">
-          <h1>Why Relifio?</h1>
+          <h1>Why Relifio?</h1> 
         </div>
         <div className="third-div">
           <h1>Sign Up To announce our official release!</h1>

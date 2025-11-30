@@ -8,7 +8,7 @@ const signupSchema = new mongoose.Schema({
   },
   SignedUpOn: {
     type: Date,
-    default: Date.now, // basically tells us when the user signed up on 
+    default: Date.now, // basically tells us when the user signed up on
   },
 });
 
