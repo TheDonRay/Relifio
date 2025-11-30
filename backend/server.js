@@ -8,14 +8,28 @@ const bodyparser = require("body-parser");
 const signupConnection = require("./database/signupdbconnection.js");
 signupConnection();
 
-// set up middleware
+// ----- CORS + middleware -----
+const allowedOrigins = [
+  "https://relifio.vercel.app", // your Vercel frontend
+];
+
 app.use(bodyparser.json());
 app.use(express.json());
-app.use(cors()); // for frontend etc.
 
-//import routes here as such
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+// // handle preflight requests
+// app.options("*", cors());
+// // ------------------------------
+
+// import routes
 const signupRoute = require("./routes/signedup.js");
-// import the route here as such
 const APIcall = require("./routes/api.js");
 
 const PORT = process.env.PORT || 2400;
@@ -26,12 +40,10 @@ app.get("/", (req, res) => {
   });
 });
 
-//mount route here to the expressApp as such
-app.use("/api/", signupRoute);
-app.use("/api/", APIcall);
+// mount routes
+app.use("/api", signupRoute);
+app.use("/api", APIcall);
 
 app.listen(PORT, () => {
-  console.log(
-    `Server is Successfully running on the following localhost: http://localhost:${PORT}`,
-  );
+  console.log(`Server is Successfully running on port ${PORT}`);
 });
