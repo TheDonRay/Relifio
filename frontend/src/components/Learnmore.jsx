@@ -1,12 +1,15 @@
+
 import React from "react";
 import { useState, useEffect } from "react";
-require("../styles/Learnmore.css");
+require("../styles/Learnmore.css"); 
+
 
 // set up basic stuff here
 // set up mongoDB database for this one to store signed up emails from people.
 export default function LearnMore() {
   // add email state
-  const [email, userEmail] = useState("");
+  const [email, userEmail] = useState(""); 
+  const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
   const userSignup = async () => { 
@@ -15,7 +18,7 @@ export default function LearnMore() {
       return; 
     } 
     try { 
-      const sendUserdata = await fetch(' http://localhost:6700/api/signup', { 
+      const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, { 
         method: "POST", 
         headers: { 
           "Content-Type" : "application/json",
@@ -58,7 +61,7 @@ export default function LearnMore() {
             experienced that firsthand. I often found myself turning to AI just
             to express how I felt, whether through quick voice messages or chat.
             That’s when I realized there was no platform designed to
-            meaningfully hold these moments. So I created Relifio: a place where
+            meaningfully hold these moments. So I'm creating Relifio: a place where
             your thoughts are not only heard but also tracked, summarized, and
             transformed into something you can reflect on. Self-reflection is
             one of the biggest drivers of personal growth, and Relifio turns
@@ -67,7 +70,7 @@ export default function LearnMore() {
           </p>
         </div>
         <div className="third-div">
-          <h1>Join the waitlist and let your chapters begin!</h1>
+          <h1>Join the waitlist and let your chapters begin !</h1>
           <input 
             className="inputbox"
             type="email"

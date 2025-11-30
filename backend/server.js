@@ -18,7 +18,7 @@ const signupRoute = require("./routes/signedup.js");
 // import the route here as such
 const APIcall = require("./routes/api.js");
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2400;
 
 app.get("/", (req, res) => {
   res.json({
