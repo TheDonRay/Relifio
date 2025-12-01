@@ -23,7 +23,8 @@ body {
 }
 
 /* ============ Title & Paragraph ============ */
-.title {
+.title { 
+  white-space: nowrap;
   color: #000000;
   line-height: 1.2;
   word-spacing: 2px;
