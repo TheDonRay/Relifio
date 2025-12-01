@@ -24,9 +24,10 @@
     box-shadow 0.3s ease;
 }
 
-.paragraph-text1, .paragraph-text2 {
+.paragraph-text1,
+.paragraph-text2 {
   line-height: 1.7rem;
-} 
+}
 
 /* Container for the signup section */
 .third-div {
@@ -104,7 +105,7 @@
   .third-div h1 {
     font-size: 24px;
   }
-  
+
   .inputbox {
     max-width: 100%;
   }

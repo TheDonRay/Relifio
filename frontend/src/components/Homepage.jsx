@@ -11,20 +11,50 @@ export default function Home() {
   const navigate = useNavigate();
 
   // Reusable function to animate any text into spans
+  // const animateText = (element, text) => {
+  //   if (!element) return;
+
+  //   element.innerHTML = "";
+  //   text.split("").forEach((char, index) => {
+  //     const span = document.createElement("span");
+
+  //     // keep spaces visible
+  //     // span.textContent = char === " " ? "\u00A0" : char;
+  //     span.textContent = char;
+
+  //     span.style.animationDelay = `${index * 0.06}s`;
+  //     span.classList.add("letter-animate");
+  //     element.appendChild(span);
+  //   });
+  // };
   const animateText = (element, text) => {
     if (!element) return;
 
     element.innerHTML = "";
-    text.split("").forEach((char, index) => {
-      const span = document.createElement("span");
 
-      // keep spaces visible
-      // span.textContent = char === " " ? "\u00A0" : char;
-      span.textContent = char; 
+    const words = text.split(" ");
+    let index = 0; // to keep animation delay continuous
 
-      span.style.animationDelay = `${index * 0.06}s`;
-      span.classList.add("letter-animate");
-      element.appendChild(span);
+    words.forEach((word, wordIdx) => {
+      // wrapper for the whole word
+      const wordSpan = document.createElement("span");
+      wordSpan.classList.add("word");
+      element.appendChild(wordSpan);
+
+      // each letter inside the word
+      [...word].forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.style.animationDelay = `${index * 0.06}s`;
+        span.classList.add("letter-animate");
+        wordSpan.appendChild(span);
+        index++;
+      });
+
+      // add a normal space *between* words
+      if (wordIdx !== words.length - 1) {
+        element.appendChild(document.createTextNode(" "));
+      }
     });
   };
 
