@@ -19,7 +19,8 @@ export default function Home() {
       const span = document.createElement("span");
 
       // keep spaces visible
-      span.textContent = char === " " ? "\u00A0" : char;
+      // span.textContent = char === " " ? "\u00A0" : char;
+      span.textContent = char; 
 
       span.style.animationDelay = `${index * 0.06}s`;
       span.classList.add("letter-animate");
