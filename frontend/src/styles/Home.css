@@ -23,23 +23,24 @@ body {
 }
 
 /* ============ Title & Paragraph ============ */
-.title { 
-  white-space: normal; 
+.title {
+  white-space: normal;
   word-wrap: break-word;
   color: #000000;
   line-height: 1.2;
-  word-spacing: 2px; 
-  max-width: 100%; 
+  word-spacing: 2px;
+  max-width: 100%;
   font-size: clamp(1.75rem, 5vw + 1rem, 3.5rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
-} 
+}
 
 .title .word {
   display: inline-block;
   white-space: nowrap;
 }
 
+/*Implement a similar break style for the paragraph elements as well*/
 .paragraph-style {
   word-spacing: 2px;
   white-space: normal; /* ensures wrapping */

@@ -10,11 +10,25 @@ export default function LearnMore() {
   const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
+  //TODO function that checks for a valid email. 
+  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+
+  const checkValidEmail = (email) => {
+    const validemail = emailregex.test(email); 
+    if (!validemail){ 
+      alert('Please Enter a valid Email Thank you!'); 
+    }  
+    return validemail; // returns the email itself. 
+  };
+
   const userSignup = async () => {
-    // base case
-    if (!email) {
-      return;
+    // base case which calls the helper function here as such which should basically help with email authentication
+    if (!checkValidEmail(email)){ 
+      return; 
+    } else { 
+      console.log("Email looks good moving on with the rest of the code"); 
     }
+    // Begins the actually fetch of the backend but sending a post request which is the req body 
     try {
       const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, {
         method: "POST",
