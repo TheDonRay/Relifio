@@ -10,7 +10,8 @@ export default function LearnMore() {
   const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
-  //TODO function that checks for a valid email. 
+  //TODO helper function that checks for a valid email.  
+  // Below here this is the email regex used for  a valid email. 
   const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
   const checkValidEmail = (email) => {

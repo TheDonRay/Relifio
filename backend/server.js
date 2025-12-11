@@ -9,7 +9,7 @@ const signupConnection = require("./database/signupdbconnection.js");
 signupConnection();
 
 // ----- CORS + middleware -----
-app.use(cors());              // allow all origins for now
+app.use(cors()); // allow all origins for now
 // app.options("*", cors());     // handle all preflight requests
 
 app.use(bodyparser.json());
