@@ -35,7 +35,8 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.title .word {
+.title .word, 
+.paragraph-style .word {
   display: inline-block;
   white-space: nowrap;
 }
@@ -44,9 +45,9 @@ body {
 .paragraph-style {
   word-spacing: 2px;
   white-space: normal; /* ensures wrapping */
-  overflow-wrap: break-word; /* prevents long words from breaking layout */
-  word-break: break-word; /* forces wrap inside long spans */
-  display: block;
+  overflow-wrap: normal; /* prevents long words from breaking layout */
+  word-break: normal; /* forces wrap inside long spans */
+  display: block; /*added a change here */ 
 }
 
 /* Each character span created in JS */
@@ -55,7 +56,7 @@ body {
   filter: blur(8px);
   opacity: 0;
   animation: clearBlur 0.7s forwards;
-  white-space: pre-wrap; /* preserves spacing */
+  white-space: inherit; /* preserves spacing added a change here to see if it would work,*/
 }
 
 /* Blur → clear animation */
