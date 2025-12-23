@@ -10,6 +10,8 @@ const signupSchema = new mongoose.Schema({
     type: Date,
     default: Date.now, // basically tells us when the user signed up on
   },
-});
+}); 
+
+//Todo: Create another schema design here. 
 
 module.exports = mongoose.model("signupschema", signupSchema);
