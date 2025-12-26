@@ -1,1 +1,27 @@
-//TODO Transfer server.js connections etc to this file and make server.js the server listening 
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const bodyparser = require("body-parser"); 
+
+// ----- CORS + middleware -----
+app.use(cors()); // allow all origins for now
+// app.options("*", cors());     // handle all preflight requests
+
+app.use(bodyparser.json());
+app.use(express.json()); 
+
+// import routes
+const signupRoute = require("./routes/signedup.js");
+const APIcall = require("./routes/api.js"); 
+
+app.get("/", (req, res) => {
+  res.json({
+    BackendResponse: "server is running",
+  });
+}); 
+
+// call the routes here. 
+app.use("/api", signupRoute);
+app.use("/api", APIcall); 
+
+module.exports = app; 

@@ -12,6 +12,10 @@ const signupSchema = new mongoose.Schema({
   },
 }); 
 
-//Todo: Create another schema design here. 
+//Todo: Create another collection design here for user user authentication 
+
+
+//TODO: create another collection for User text 
+
 
 module.exports = mongoose.model("signupschema", signupSchema);
