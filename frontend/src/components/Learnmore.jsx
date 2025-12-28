@@ -41,7 +41,8 @@ export default function LearnMore() {
       // set the result now
       const result = await sendUserdata.json();
       console.log("User Signed up details:", result);
-      // clear it once its sent to the backend here
+      // clear it once its sent to the backend here 
+      alert("Success! Your email is now signed up"); 
       userEmail("");
     } catch (error) {
       console.error("There was an error sending data to user", error);

@@ -6,7 +6,8 @@ require("../styles/Mainpage.css");
 //TODO: Start implementing the page and external AI to help with this. 
 export default function MainPage() {
   return (
-    <>
+    <> 
+    //TODO: implement the therapist icon 
       <div className="container-dv">
         <div className="first-div">
           <h1>Coming soon. Thank you for your support! 😋</h1> 
