@@ -7,12 +7,8 @@ require("../styles/Mainpage.css");
 export default function MainPage() {
   return (
     <> 
-    //TODO: implement the therapist icon 
       <div className="container-dv">
-        <div className="first-div">
-          <h1>Coming soon. Thank you for your support! 😋</h1> 
-          <h2>Welcome to Relifio your AI therapist! I wanted to ask a few questions about you lets get started!</h2>
-        </div>
+        
       </div>
     </>
   );

@@ -91,7 +91,7 @@ export default function Home() {
             <span>Learn More</span>
           </button>
           <button className="btn2" onClick={buttonNav2}>
-            <span>Choose Your therapist!</span>
+            <span>Let's begin a chapter!</span>
           </button>
         </div>
       </div>
