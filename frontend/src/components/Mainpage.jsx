@@ -19,7 +19,8 @@ export default function MainPage() {
   }
   
   return (
-    <>  
+    <>   
+      {/*TODO: Title, fix the textbox wrapper to go to a new line within the textbox. */}
       <div className="title-before-textbox"> 
         {/*Here im going to add the title like a catchy title for relifio */}
       </div> 
