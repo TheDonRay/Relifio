@@ -28,7 +28,7 @@ export default function MainPage() {
       <div className="container-dv">
         <div className="content-wrapper">
           <div className="hold-icon-div">
-            <img src="/relief.png" alt="Relifio Icon" className="icon-img"/>
+            <img src="/therapist.png" alt="Relifio Icon" className="icon-img"/>
           </div> 
 
           <div className="textbox"> 
