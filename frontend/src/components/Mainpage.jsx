@@ -22,7 +22,7 @@ export default function MainPage() {
       console.log("userWrote:", textValue);
       // implement try and atch for the sending data here
       try {
-        const sendData = await fetch(`backendURLapiendpoint`, {
+        const sendData = await fetch(`http://localhost:6700/api/usertext`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
