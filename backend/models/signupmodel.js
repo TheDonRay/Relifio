@@ -10,12 +10,10 @@ const signupSchema = new mongoose.Schema({
     type: Date,
     default: Date.now, // basically tells us when the user signed up on
   },
-}); 
+});
 
-//Todo: Create another collection design here for user user authentication 
+//Todo: Create another collection design here for user user authentication
 
-
-//TODO: create another collection for User text 
-
+//TODO: create another collection for User text
 
 module.exports = mongoose.model("signupschema", signupSchema);

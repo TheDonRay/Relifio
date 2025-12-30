@@ -1,4 +1,4 @@
-/*TODO: Add db.js details so like the connection stuff here  */ 
+/*TODO: Add db.js details so like the connection stuff here  */
 require("dotenv").config();
 const mongoose = require("mongoose");
 
