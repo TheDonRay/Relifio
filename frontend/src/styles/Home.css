@@ -35,7 +35,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.title .word, 
+.title .word,
 .paragraph-style .word {
   display: inline-block;
   white-space: nowrap;
@@ -47,7 +47,7 @@ body {
   white-space: normal; /* ensures wrapping */
   overflow-wrap: normal; /* prevents long words from breaking layout */
   word-break: normal; /* forces wrap inside long spans */
-  display: block; /*added a change here */ 
+  display: block; /*added a change here */
 }
 
 /* Each character span created in JS */

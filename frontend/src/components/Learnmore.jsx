@@ -10,26 +10,26 @@ export default function LearnMore() {
   const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
-  //TODO helper function that checks for a valid email.  
-  // Below here this is the email regex used for  a valid email. 
-  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+  //TODO helper function that checks for a valid email.
+  // Below here this is the email regex used for  a valid email.
+  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const checkValidEmail = (email) => {
-    const validemail = emailregex.test(email); 
-    if (!validemail){ 
-      alert('Please Enter a valid Email Thank you!'); 
-    }  
-    return validemail; // returns the email itself. 
+    const validemail = emailregex.test(email);
+    if (!validemail) {
+      alert("Please Enter a valid Email Thank you!");
+    }
+    return validemail; // returns the email itself.
   };
 
   const userSignup = async () => {
     // base case which calls the helper function here as such which should basically help with email authentication
-    if (!checkValidEmail(email)){ 
-      return; 
-    } else { 
-      console.log("Email looks good moving on with the rest of the code"); 
+    if (!checkValidEmail(email)) {
+      return;
+    } else {
+      console.log("Email looks good moving on with the rest of the code");
     }
-    // Begins the actually fetch of the backend but sending a post request which is the req body 
+    // Begins the actually fetch of the backend but sending a post request which is the req body
     try {
       const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, {
         method: "POST",
@@ -41,14 +41,13 @@ export default function LearnMore() {
       // set the result now
       const result = await sendUserdata.json();
       console.log("User Signed up details:", result);
-      // clear it once its sent to the backend here 
-      alert("Success! Your email is now signed up"); 
+      // clear it once its sent to the backend here
+      alert("Success! Your email is now signed up");
       userEmail("");
     } catch (error) {
       console.error("There was an error sending data to user", error);
     }
   };
-  // TODO: Fix error that Im facing where when user types it presses sign up which is not what we want that causes database overload.
   return (
     <>
       <div className="container-div">

@@ -1,9 +1,52 @@
+.title-before-textbox{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;    
+  margin-top: 6rem; 
+  margin-bottom: 2rem;
+  padding: 0 20px;
+}
+
+.heading-title {
+  font-size: 2.5rem;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Blur to clear animation for each word */
+.word {
+  display: inline-block;
+  animation: blurToClear 0.8s ease-out forwards;
+  filter: blur(10px);
+  opacity: 0;
+}
+
+.word-1 { animation-delay: 0.1s; }
+.word-2 { animation-delay: 0.2s; }
+.word-3 { animation-delay: 0.3s; }
+.word-4 { animation-delay: 0.4s; }
+.word-5 { animation-delay: 0.5s; }
+.word-6 { animation-delay: 0.6s; }
+
+@keyframes blurToClear {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
 .container-dv {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px;
-  min-height: 100vh;
+  padding: 0 20px 50px 20px;
+  min-height: 20vh;
 }
 
 .content-wrapper {
@@ -16,7 +59,9 @@
   max-width: 900px;
   width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .content-wrapper:hover {
@@ -32,7 +77,7 @@
   width: 80px;
   height: 80px;
   object-fit: contain;
-  border-radius: 12px; 
+  border-radius: 12px;
 }
 
 .textbox {
@@ -52,6 +97,7 @@
   border-radius: 10px;
   font-size: 15px;
   transition: border-color 0.3s ease;
+  word-wrap: break-word;
 }
 
 .text-input:focus {
@@ -67,7 +113,10 @@
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.1s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.1s ease;
+  white-space: nowrap;
 }
 
 .submitbtn:hover:not(:disabled) {
@@ -82,14 +131,42 @@
 
 /* Responsive design for mobile */
 @media (max-width: 768px) {
+  .title-before-textbox {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heading-title {
+    font-size: 1.8rem;
+  }
+
   .content-wrapper {
     flex-direction: column;
     gap: 20px;
     padding: 30px 25px;
   }
-  
+
   .icon-img {
     width: 60px;
     height: 60px;
+  }
+  
+  .input-form {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .submitbtn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading-title {
+    font-size: 1.5rem;
+  }
+  
+  .content-wrapper {
+    padding: 20px 15px;
   }
 }
