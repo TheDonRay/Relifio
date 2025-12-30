@@ -1,21 +1,47 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 require("../styles/Mainpage.css");
 
 export default function MainPage() {
   const [textValue, newTextValue] = useState("");
+  const textareaRef = useRef(null);
 
   const handleChange = (textevent) => {
-    newTextValue(textevent.target.value);
+    const textarea = textevent.target;
+    newTextValue(textarea.value);
+
+    // Auto-resize textarea
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
   };
 
-  // TODO: need to set up post request to the backend to handle the body of text element. 
-  const buttonsubmission = (btnevent) => {
+  const buttonsubmission = async (btnevent) => {
     btnevent.preventDefault();
 
     if (textValue.trim()) {
       console.log("userWrote:", textValue);
-      newTextValue("");
+      // implement try and atch for the sending data here
+      try {
+        const sendData = await fetch(`backendURLapiendpoint`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: textValue }),
+        });
+        const res = await sendData.json();
+        console.log("Res sent successfully to the backend", res);
+
+        // clear the textValue
+        newTextValue("");
+
+        // Reset textarea height after submission
+        if (textareaRef.current) {
+          textareaRef.current.style.height = "auto";
+        }
+      } catch (error) {
+        console.log("There was an error sending data to the backend", error);
+      }
     }
   };
 
@@ -40,8 +66,8 @@ export default function MainPage() {
 
           <div className="textbox">
             <form onSubmit={buttonsubmission} className="input-form">
-              <input
-                type="text"
+              <textarea
+                ref={textareaRef}
                 value={textValue}
                 onChange={handleChange}
                 placeholder="Hey there! Excited for a new chapter. What's on your mind today?"

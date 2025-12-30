@@ -55,7 +55,7 @@ body {
   display: inline-block;
   filter: blur(8px);
   opacity: 0;
-  animation: clearBlur 0.7s forwards;
+  animation: clearBlur 0.5s forwards;
   white-space: inherit; /* preserves spacing added a change here to see if it would work,*/
 }
 
