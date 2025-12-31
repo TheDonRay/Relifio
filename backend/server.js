@@ -1,7 +1,7 @@
 require("dotenv").config();
 // call mongodb connection
 const dbConnection = require("./config/db.js");
-dbConnection();
+dbConnection(); // call the db function here 
 
 const app = require("./app.js");
 
