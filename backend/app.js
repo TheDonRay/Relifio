@@ -12,7 +12,7 @@ app.use(express.json());
 
 // import routes
 const signupRoute = require("./routes/signedup.js");
-const APIcall = require("./routes/api.js");
+const userConvo = require("./routes/Userconversation.js");
 
 app.get("/", (req, res) => {
   res.json({
@@ -22,6 +22,6 @@ app.get("/", (req, res) => {
 
 // call the routes here.
 app.use("/api", signupRoute);
-app.use("/api", APIcall);
+app.use("/api", userConvo);
 
 module.exports = app;

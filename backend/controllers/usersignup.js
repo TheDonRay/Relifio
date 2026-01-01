@@ -8,19 +8,21 @@ const EmailValidation = (req, res, next) => {
   try {
     const { email } = req.body;
 
-    if (!email || email.trim() === "") {
+    // get the email regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email || !emailRegex.test(email.trim())) {
       return res.status(404).json({
-        //TODO: Continue validation here
+        emailValid: "Email is not valid",
       });
     }
+    next(); // goes to the next controller function only if validation passes then calls the next function in our controller.
   } catch (error) {
     console.log("Error submitting email", error);
     res.status(404).json({
       response: error,
     });
   }
-  // invoke the next function here as such
-  next();
 };
 
 // now the actual function logic here
@@ -44,4 +46,5 @@ const userSignup = async (req, res) => {
   }
 };
 
-module.exports = userSignup;
+module.exports = { userSignup, EmailValidation };
+//instead of module.exports = nameofFunction we can write exports.FunctionName in our controller file.
