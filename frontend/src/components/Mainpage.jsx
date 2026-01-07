@@ -56,7 +56,7 @@ export default function MainPage() {
             sessionId: sessionId // NEW: Send sessionId
           }),
         });
-        const res = await sendData.json();
+        const res = await sendData.json(); // this is the response from the backend. 
         console.log("Res sent successfully to the backend", res);
 
         // NEW: Add AI response to UI
