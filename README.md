@@ -1,4 +1,4 @@
-# 🌟 Relifio
+# 🌟 Relifio (In Progress)
 
 **AI-powered emotional support through structured life chapters**
 
