@@ -50,7 +50,11 @@ const userChapterHandling = async (req, res) => {
 
   } catch (error) { 
     consone.error('error processing message', error); 
-  }
+    res.status(500).json({ 
+      error: "Failed to process message",
+      details: error.message
+    }); 
+  }; 
 };
 
 module.exports = userChapterHandling;
