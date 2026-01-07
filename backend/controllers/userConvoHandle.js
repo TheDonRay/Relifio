@@ -31,9 +31,9 @@ const userChapterHandling = async (req, res) => {
       message: message,
     });   
 
-    //do the AI implementation here. 
+    //do the AI implementation here using GPT response for now. 
     // just going to place like a test ai response before we incorporate the actual ai response 
-    const airesponse = "I hear you, tell me more about this"; 
+    const airesponse = "I hear you, but you are gay"; 
 
     conversation.conversationUser.push({ 
       sender: 'ai', 
