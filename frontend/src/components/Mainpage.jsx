@@ -1,10 +1,20 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 require("../styles/Mainpage.css");
 
 export default function MainPage() {
   const [textValue, newTextValue] = useState("");
+  const [messages, setMessages] = useState([]); // NEW: Store conversation
+  const [sessionId, setSessionId] = useState(""); // NEW: Track session
+  const [isLoading, setIsLoading] = useState(false); // NEW: Loading state
   const textareaRef = useRef(null);
+
+  // NEW: Generate sessionId when component loads
+  useEffect(() => {
+    const newSessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    setSessionId(newSessionId);
+    console.log("Session ID created:", newSessionId);
+  }, []);
 
   const handleChange = (textevent) => {
     const textarea = textevent.target;
@@ -18,29 +28,54 @@ export default function MainPage() {
   const buttonsubmission = async (btnevent) => {
     btnevent.preventDefault();
 
-    if (textValue.trim()) {
-      console.log("userWrote:", textValue);
-      // implement try and atch for the sending data here
+    if (textValue.trim() && !isLoading) {
+      const userMessage = textValue.trim();
+      console.log("userWrote:", userMessage);
+      
+      // NEW: Add user message to UI immediately
+      setMessages(prev => [...prev, { sender: 'user', message: userMessage }]);
+      
+      // Clear input
+      newTextValue("");
+
+      // Reset textarea height after submission
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+      }
+
+      setIsLoading(true); // NEW: Start loading
+
       try {
-        const sendData = await fetch(`http://localhost:6700/api/usertext`, {
+        const sendData = await fetch(`http://localhost:6700/api/userconvo`, { // CHANGED: endpoint
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: textValue }),
+          body: JSON.stringify({ 
+            message: userMessage,
+            sessionId: sessionId // NEW: Send sessionId
+          }),
         });
         const res = await sendData.json();
         console.log("Res sent successfully to the backend", res);
 
-        // clear the textValue
-        newTextValue("");
-
-        // Reset textarea height after submission
-        if (textareaRef.current) {
-          textareaRef.current.style.height = "auto";
+        // NEW: Add AI response to UI
+        if (res.airesponse) {
+          setMessages(prev => [...prev, { 
+            sender: 'ai', 
+            message: res.airesponse 
+          }]);
         }
+
       } catch (error) {
         console.log("There was an error sending data to the backend", error);
+        // NEW: Show error message to user
+        setMessages(prev => [...prev, { 
+          sender: 'ai', 
+          message: 'Sorry, something went wrong. Please try again.' 
+        }]);
+      } finally {
+        setIsLoading(false); // NEW: Stop loading
       }
     }
   };
@@ -64,6 +99,25 @@ export default function MainPage() {
             <img src="/therapist.png" alt="Relifio Icon" className="icon-img" />
           </div>
 
+          {/* NEW: Display conversation messages */}
+          {messages.length > 0 && (
+            <div className="messages-container">
+              {messages.map((msg, index) => (
+                <div 
+                  key={index} 
+                  className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+                >
+                  <strong>{msg.sender === 'user' ? 'You' : 'AI'}:</strong> {msg.message}
+                </div>
+              ))}
+              {isLoading && (
+                <div className="message ai-message">
+                  <strong>AI:</strong> <em>typing...</em>
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="textbox">
             <form onSubmit={buttonsubmission} className="input-form">
               <textarea
@@ -72,9 +126,13 @@ export default function MainPage() {
                 onChange={handleChange}
                 placeholder="Hey there! Excited for a new chapter. What's on your mind today?"
                 className="text-input"
+                disabled={isLoading} // NEW: Disable while loading
               />
-              <button className="submitbtn" disabled={!textValue.trim()}>
-                Send
+              <button 
+                className="submitbtn" 
+                disabled={!textValue.trim() || isLoading} // NEW: Disable while loading
+              >
+                {isLoading ? 'Sending...' : 'Send'} {/* NEW: Show loading text */}
               </button>
             </form>
           </div>
