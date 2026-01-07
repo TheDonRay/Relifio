@@ -31,6 +31,7 @@ const userChapterHandling = async (req, res) => {
       message: message,
     });   
 
+    //do the AI implementation here. 
     // just going to place like a test ai response before we incorporate the actual ai response 
     const airesponse = "I hear you, tell me more about this"; 
 
