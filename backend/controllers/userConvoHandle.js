@@ -38,8 +38,16 @@ const userChapterHandling = async (req, res) => {
     // just going to place like a test ai response before we incorporate the actual ai response 
     const airesponse = await client.chat.completions.create({ 
       model:'gpt-3.5-turbo',  
-      input: 'you are a emotional therapist and also a friend to listen and help',
-      messages: messages, 
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an emotional therapist and also a friend to listen and help'
+        },
+        {
+          role: 'user',
+          content: message
+        }
+      ]
     });  
 
     const aiMessage = airesponse.choices[0].message.content; 
