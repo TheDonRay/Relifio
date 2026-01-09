@@ -4,17 +4,31 @@ require("../styles/Mainpage.css");
 
 export default function MainPage() {
   const [textValue, newTextValue] = useState("");
-  const [messages, setMessages] = useState([]); // NEW: Store conversation
-  const [sessionId, setSessionId] = useState(""); // NEW: Track session
-  const [isLoading, setIsLoading] = useState(false); // NEW: Loading state
+  const [messages, setMessages] = useState([]);
+  const [sessionId, setSessionId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const textareaRef = useRef(null);
+  const messagesEndRef = useRef(null); // NEW: For auto-scroll
 
-  // NEW: Generate sessionId when component loads
+  // Generate or retrieve sessionId when component loads
   useEffect(() => {
-    const newSessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    setSessionId(newSessionId);
-    console.log("Session ID created:", newSessionId);
+    // Check if session exists in localStorage
+    let existingSessionId = localStorage.getItem('chatSessionId');
+    
+    if (!existingSessionId) {
+      // Create new session if none exists
+      existingSessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('chatSessionId', existingSessionId);
+    }
+    
+    setSessionId(existingSessionId);
+    console.log("Session ID:", existingSessionId);
   }, []);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleChange = (textevent) => {
     const textarea = textevent.target;
@@ -28,11 +42,11 @@ export default function MainPage() {
   const buttonsubmission = async (btnevent) => {
     btnevent.preventDefault();
 
-    if (textValue.trim() && !isLoading) {
+    if (textValue.trim() && !isLoading && sessionId) {
       const userMessage = textValue.trim();
-      console.log("userWrote:", userMessage);
+      console.log("User wrote:", userMessage);
       
-      // NEW: Add user message to UI immediately
+      // Add user message to UI immediately
       setMessages(prev => [...prev, { sender: 'user', message: userMessage }]);
       
       // Clear input
@@ -43,39 +57,48 @@ export default function MainPage() {
         textareaRef.current.style.height = "auto";
       }
 
-      setIsLoading(true); // NEW: Start loading
+      setIsLoading(true);
 
       try {
-        const sendData = await fetch(`http://localhost:6700/api/userconvo`, { // CHANGED: endpoint
+        console.log("Sending to backend:", { message: userMessage, sessionId });
+        
+        const sendData = await fetch(`http://localhost:6700/api/userconvo`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ 
             message: userMessage,
-            sessionId: sessionId // NEW: Send sessionId
+            sessionId: sessionId
           }),
         });
-        const res = await sendData.json(); // this is the response from the backend. 
-        console.log("Res sent successfully to the backend", res);
 
-        // NEW: Add AI response to UI
-        if (res.airesponse) {
+        // Check if response is ok
+        if (!sendData.ok) {
+          throw new Error(`HTTP error! status: ${sendData.status}`);
+        }
+
+        const res = await sendData.json(); // gets response from the backend here 
+        console.log("Response from backend:", res);
+
+        // Add AI response to UI
+        if (res.success && res.airesponse) {
           setMessages(prev => [...prev, { 
             sender: 'ai', 
             message: res.airesponse 
           }]);
+        } else {
+          throw new Error(res.error || 'Invalid response format');
         }
 
       } catch (error) {
-        console.log("There was an error sending data to the backend", error);
-        // NEW: Show error message to user
+        console.error("Error sending data to backend:", error);
         setMessages(prev => [...prev, { 
           sender: 'ai', 
           message: 'Sorry, something went wrong. Please try again.' 
         }]);
       } finally {
-        setIsLoading(false); // NEW: Stop loading
+        setIsLoading(false);
       }
     }
   };
@@ -99,7 +122,7 @@ export default function MainPage() {
             <img src="/therapist.png" alt="Relifio Icon" className="icon-img" />
           </div>
 
-          {/* NEW: Display conversation messages */}
+          {/* Display conversation messages */}
           {messages.length > 0 && (
             <div className="messages-container">
               {messages.map((msg, index) => (
@@ -107,14 +130,18 @@ export default function MainPage() {
                   key={index} 
                   className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
                 >
-                  <strong>{msg.sender === 'user' ? 'You' : 'Relifio'}:</strong> {msg.message}
+                  <strong>{msg.sender === 'user' ? 'You' : 'Relifio'}:</strong>
+                  <div style={{ whiteSpace: 'pre-wrap' }}>
+                    {msg.message}
+                  </div>
                 </div>
               ))}
               {isLoading && (
                 <div className="message ai-message">
-                  <strong>AI:</strong> <em>typing...</em>
+                  <strong>Relifio:</strong> <em>typing...</em>
                 </div>
               )}
+              <div ref={messagesEndRef} /> {/* For auto-scroll */}
             </div>
           )}
 
@@ -126,13 +153,13 @@ export default function MainPage() {
                 onChange={handleChange}
                 placeholder="Hey there! Excited for a new chapter. What's on your mind today?"
                 className="text-input"
-                disabled={isLoading} // NEW: Disable while loading
+                disabled={isLoading}
               />
               <button 
                 className="submitbtn" 
-                disabled={!textValue.trim() || isLoading} // NEW: Disable while loading
+                disabled={!textValue.trim() || isLoading || !sessionId}
               >
-                {isLoading ? 'Sending...' : 'Send'} {/* NEW: Show loading text */}
+                {isLoading ? 'Sending...' : 'Send'}
               </button>
             </form>
           </div>

@@ -63,8 +63,8 @@
 
 .content-wrapper {
   display: flex;
-  align-items: center;
-  gap: 30px;
+  flex-direction: column; /* CHANGED: from align-items: center to stack vertically */
+  gap: 20px; /* CHANGED: from 30px to 20px */
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 40px 50px;
@@ -83,6 +83,8 @@
 
 .hold-icon-div {
   flex-shrink: 0;
+  display: flex; /* ADDED: to center the icon */
+  justify-content: center; /* ADDED: to center the icon */
 }
 
 .icon-img {
@@ -91,6 +93,102 @@
   object-fit: contain;
   border-radius: 12px;
 }
+
+/* ============================================ */
+/* NEW: MESSAGES CONTAINER STYLING */
+/* ============================================ */
+.messages-container {
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Custom scrollbar */
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Individual message styling */
+.message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.5;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-message {
+  background: #4a90e2;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.ai-message {
+  background: white;
+  color: #333;
+  align-self: flex-start;
+  border: 1px solid #e0e0e0;
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.85em;
+  opacity: 0.9;
+}
+
+/* Typing indicator animation */
+.ai-message em {
+  color: #666;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+/* ============================================ */
+/* END OF MESSAGES CONTAINER STYLING */
+/* ============================================ */
 
 .textbox {
   flex-grow: 1;
@@ -121,6 +219,11 @@
 .text-input:focus {
   outline: none;
   border-color: #4a90e2;
+}
+
+.text-input:disabled {
+  background: #f5f5f5; /* ADDED: visual feedback when disabled */
+  cursor: not-allowed; /* ADDED: visual feedback when disabled */
 }
 
 .submitbtn {
@@ -171,6 +274,16 @@
     height: 60px;
   }
 
+  /* NEW: Adjust messages container for mobile */
+  .messages-container {
+    height: 350px;
+    max-height: 350px;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
   .input-form {
     flex-direction: column;
     gap: 12px;
@@ -189,5 +302,11 @@
 
   .content-wrapper {
     padding: 20px 15px;
+  }
+
+  /* NEW: Smaller messages container on tiny screens */
+  .messages-container {
+    height: 300px;
+    max-height: 300px;
   }
 }
