@@ -1,4 +1,8 @@
-//import the model here as such 
+const OpenAi = require('openai'); 
+const client = new OpenAi({ 
+  apiKey: process.env.AIKEY, 
+}); 
+
 const ConversationModel = require("../models/conversationmodel.js"); 
 
 const userChapterHandling = async (req, res) => {
@@ -7,7 +11,7 @@ const userChapterHandling = async (req, res) => {
     const { sessionId, message } = req.body;  
 
     if (!message || !sessionId) { 
-      res.status(400).json({ 
+      return res.status(400).json({ 
         ErrorMessage: 'Message and SessionId are required'
       });
     }  
@@ -32,24 +36,31 @@ const userChapterHandling = async (req, res) => {
 
     //do the AI implementation here using GPT response for now. 
     // just going to place like a test ai response before we incorporate the actual ai response 
-    const airesponse = "I hear you, but you are gay"; 
+    const airesponse = await client.chat.completions.create({ 
+      model:'gpt-3.5-turbo',  
+      input: 'you are a emotional therapist and also a friend to listen and help',
+      messages: messages, 
+    });  
+
+    const aiMessage = airesponse.choices[0].message.content; 
 
     conversation.conversationUser.push({ 
       sender: 'ai', 
-      message: airesponse,
+      message: aiMessage,
     }); 
 
     await conversation.save(); 
     console.log('conversation successfully saved');  
 
+    //sending it back to the frontend.
     res.status(200).json({ 
       success: true, 
-      airesponse: airesponse, 
+      airesponse: aiMessage, 
       conversationId: conversation._id, 
     }); 
 
   } catch (error) { 
-    consone.error('error processing message', error); 
+    console.error('error processing message', error); 
     res.status(500).json({ 
       error: "Failed to process message",
       details: error.message
