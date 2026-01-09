@@ -107,7 +107,7 @@ export default function MainPage() {
                   key={index} 
                   className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
                 >
-                  <strong>{msg.sender === 'user' ? 'You' : 'AI'}:</strong> {msg.message}
+                  <strong>{msg.sender === 'user' ? 'You' : 'Relifio'}:</strong> {msg.message}
                 </div>
               ))}
               {isLoading && (
