@@ -6,7 +6,9 @@ export default function MainPage() {
   const [textValue, newTextValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [sessionId, setSessionId] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
+  const [summary, ConversationSummary] = useState(""); 
+  const [summaryLoad, summaryIsLoading] = useState(false); 
   const textareaRef = useRef(null);
   const messagesEndRef = useRef(null); // NEW: For auto-scroll
 
@@ -102,6 +104,25 @@ export default function MainPage() {
       }
     }
   };
+ 
+  const handleSummaryConvo = async () => { 
+    // start of with a base case here as such 
+    if (!sessionId || sessionId.trim() === ''){ 
+      return; 
+    } 
+    //set the loading to true here  
+    summaryIsLoading(true); // starts the loading  
+
+    //implement a try and catch case here as such  
+    try { 
+      console.log('Requesting summary for session', sessionId); 
+      // now we need to set up the backend 
+      
+    } catch (error) { 
+
+    }
+
+  }
 
   return (
     <>
@@ -162,8 +183,17 @@ export default function MainPage() {
                 {isLoading ? 'Sending...' : 'Send'}
               </button>
             </form>
+          </div> 
+
+          {/*Working on the satisfy part of user being complete with their story*/} 
+          <div className="satisfy-container"> 
+            <div className="satisfy-button"> 
+              <button className='satisfybtn'> 
+                I'm satisfied with my conversation
+              </button>
+            </div>
           </div>
-        </div>
+        </div> 
       </div>
     </>
   );
