@@ -190,6 +190,74 @@
 /* END OF MESSAGES CONTAINER STYLING */
 /* ============================================ */
 
+/* ============================================ */
+/* SATISFY/SUMMARY CONTAINER STYLING */
+/* ============================================ */
+.satisfy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.satisfy-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.satisfybtn {
+  padding: 12px 32px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+  font-size: 15px;
+}
+
+.satisfybtn:hover:not(:disabled) {
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.satisfybtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.summary-display {
+  width: 100%;
+  background: #f0f7ff;
+  border: 2px solid #4a90e2;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+.summary-display h3 {
+  color: #4a90e2;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.summary-display p {
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+/* ============================================ */
+/* END OF SATISFY/SUMMARY STYLING */
+/* ============================================ */
+
 .textbox {
   flex-grow: 1;
 }
@@ -291,6 +359,14 @@
   }
 
   .submitbtn {
+    width: 100%;
+  }
+
+  .satisfy-button {
+    width: 100%;
+  }
+
+  .satisfybtn {
     width: 100%;
   }
 }
