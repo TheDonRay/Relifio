@@ -116,10 +116,29 @@ export default function MainPage() {
     //implement a try and catch case here as such  
     try { 
       console.log('Requesting summary for session', sessionId); 
-      // now we need to set up the backend 
+      // now we need to set up the backend to recieve the session ID as a post request because its sending data to the backend.  
+      const SummaryBackend = await fetch(`http://localhost:6700/api/convosummary`, { 
+        method: "POST", 
+        headers: { 
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({ sessionId: sessionId }),
+      }); 
+      
+      if (!SummaryBackend.ok) {
+        throw new Error(`HTTP error! status: ${SummaryBackend.status}`);
+      }
+      
+      const responseFromBackend = await SummaryBackend.json(); 
+      // update the conversationSummary to hold the summary data from the backend. 
+      ConversationSummary(responseFromBackend); 
+      console.log("Summary received:", responseFromBackend);
       
     } catch (error) { 
-
+      console.error("Error fetching summary:", error);
+      ConversationSummary("Failed to generate summary. Please try again.");
+    } finally {
+      summaryIsLoading(false); // stop the loading 
     }
 
   }
@@ -188,10 +207,20 @@ export default function MainPage() {
           {/*Working on the satisfy part of user being complete with their story*/} 
           <div className="satisfy-container"> 
             <div className="satisfy-button"> 
-              <button className='satisfybtn'> 
-                I'm satisfied with my conversation
+              <button 
+                className='satisfybtn'
+                onClick={handleSummaryConvo}
+                disabled={summaryLoad}
+              > 
+                {summaryLoad ? 'Generating summary...' : 'I\'m satisfied with my conversation'}
               </button>
             </div>
+            {summary && (
+              <div className="summary-display">
+                <h3>Conversation Summary:</h3>
+                <p>{summary}</p>
+              </div>
+            )}
           </div>
         </div> 
       </div>
