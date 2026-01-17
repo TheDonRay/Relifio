@@ -52,7 +52,7 @@ export default function LearnMore() {
     <>
       <div className="container-div">
         <div className="first-div">
-          <h1>What is Relifio?</h1>
+          <h1>What is <span className='t3-color'>Relifio?</span></h1>
           <p className="paragraph-text1">
             Relifio is a mental wellness SaaS platform that provides on-demand
             emotional support through AI-powered therapeutic conversations in a
@@ -67,7 +67,7 @@ export default function LearnMore() {
           </p>
         </div>
         <div className="second-div">
-          <h1>Why Relifio?</h1>
+          <h1>Why <span className='t2-color'>Relifio?</span></h1>
           <p className="paragraph-text2">
             Because reassurance matters. Even with friends and a supportive
             family, there are moments when you still feel alone—and I’ve

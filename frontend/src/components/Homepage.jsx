@@ -27,7 +27,7 @@ export default function Home() {
   //     element.appendChild(span);
   //   });
   // };
-  const animateText = (element, text) => {
+  const animateText = (element, text, highlightWords = []) => {
     if (!element) return;
 
     element.innerHTML = "";
@@ -36,9 +36,18 @@ export default function Home() {
     let index = 0; // to keep animation delay continuous
 
     words.forEach((word, wordIdx) => {
+      // Remove punctuation to check for highlighting
+      const cleanWord = word.toLowerCase().replace(/[.,!?;:—]/g, "");
+      
       // wrapper for the whole word
       const wordSpan = document.createElement("span");
       wordSpan.classList.add("word");
+      
+      // Check if this word should be highlighted
+      if (highlightWords.includes(cleanWord)) {
+        wordSpan.classList.add("highlight");
+      }
+      
       element.appendChild(wordSpan);
 
       // each letter inside the word
@@ -63,7 +72,7 @@ export default function Home() {
     const paragraphText =
       "Your thoughts become chapters, Your chapters become the story of you.";
 
-    animateText(titleRef.current, titleText);
+    animateText(titleRef.current, titleText, ["technology", "empathy"]);
     animateText(paragraphRef.current, paragraphText);
   }, []);
 

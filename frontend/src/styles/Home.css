@@ -59,6 +59,11 @@ body {
   white-space: inherit; /* preserves spacing added a change here to see if it would work,*/
 }
 
+/* Highlight color for specific words */
+.highlight {
+  color: #1875ff;
+}
+
 /* Blur → clear animation */
 @keyframes clearBlur {
   0% {
