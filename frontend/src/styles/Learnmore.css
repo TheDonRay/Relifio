@@ -76,28 +76,58 @@
 
 /* Button styling */
 .signupbtn {
-  background: #000000;
+  background: #1875ff;
   color: #ffffff;
-  border: 2px solid #000000;
   border-radius: 8px;
   padding: 14px 32px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: 4px 4px 0px #1875ff;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Button text span (for arrow animation) */
+.signupbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+/* Arrow that appears on hover */
+.signupbtn span::after {
+  content: "→";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -18px;
+  transition: 0.4s;
+  font-weight: 600;
 }
 
 .signupbtn:hover {
-  background: #ffffff;
-  color: #000000;
+  background: #0f63dd;
+  color: #ffffff;
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: 6px 6px 0px #1875ff;
+}
+
+.signupbtn:hover span {
+  padding-right: 2.2em;
+}
+
+.signupbtn:hover span::after {
+  opacity: 1;
+  right: 0;
 }
 
 .signupbtn:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: 2px 2px 0px #1875ff;
 }
 
 /* Responsive design */
@@ -109,4 +139,8 @@
   .inputbox {
     max-width: 100%;
   }
+}
+
+.t1-color{ 
+  color: #1875ff;
 }

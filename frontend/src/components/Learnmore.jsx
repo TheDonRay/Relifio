@@ -83,7 +83,7 @@ export default function LearnMore() {
           </p>
         </div>
         <div className="third-div">
-          <h1>Join the waitlist and let your chapters begin !</h1>
+          <h1>Stay updated with <span className='t1-color'>Relifio!</span></h1>
           <input
             className="inputbox"
             type="email"
