@@ -91,9 +91,9 @@ export default function Home() {
   return (
     <div className="home-wrapper">
       <div className="container1">
-        <h1 className="title" ref={titleRef}></h1>
+        <h1 className="title" ref={titleRef}>Where technology meets empathy.</h1>
 
-        <p className="paragraph-style" ref={paragraphRef}></p>
+        <p className="paragraph-style" ref={paragraphRef}>Your thoughts become chapters, Your chapters become the story of you.</p>
 
         <div className="buttons-row">
           <button className="btn1" onClick={buttonNav1}>
