@@ -212,7 +212,7 @@ export default function MainPage() {
                 onClick={handleSummaryConvo}
                 disabled={summaryLoad}
               > 
-                {summaryLoad ? 'Generating summary...' : 'I\'m satisfied with my conversation'}
+                {summaryLoad ? 'Generating summary...' : 'I feel satisfied with our conversation'}
               </button>
             </div>
             {summary && (
