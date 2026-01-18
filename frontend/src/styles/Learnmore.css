@@ -1,67 +1,356 @@
-.container-div {
+/* Learn More Page Styles */
+.learn-more-page {
   min-height: 100vh;
+  background: #fafafa;
+}
+
+/* ========== Hero Section ========== */
+.hero-section {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 40px 20px;
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  justify-content: space-between;
+  padding: 80px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
   gap: 60px;
 }
 
-.first-div,
-.second-div,
-.third-div {
-  background: rgba(255, 255, 255, 0.95);
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(24, 117, 255, 0.1);
+  color: #1875ff;
+  padding: 8px 16px;
   border-radius: 20px;
-  padding: 50px 60px;
-  max-width: 700px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+}
+
+.hero-title .highlight {
+  color: #1875ff;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 40px 0;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: #000;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #888;
+  font-weight: 500;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: #ddd;
+}
+
+.hero-visual {
+  flex: 1;
+  position: relative;
+  height: 350px;
+  max-width: 400px;
+}
+
+.floating-card {
+  position: absolute;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 4px 4px 0px #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+}
+
+.card-icon {
+  font-size: 24px;
+}
+
+.card-1 {
+  top: 20px;
+  left: 20px;
+}
+
+.card-2 {
+  top: 120px;
+  right: 0;
+}
+
+.card-3 {
+  bottom: 40px;
+  left: 60px;
+}
+
+/* ========== Content Sections ========== */
+.content-section {
+  padding: 80px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.section-grid.reverse {
+  direction: rtl;
+}
+
+.section-grid.reverse > * {
+  direction: ltr;
+}
+
+.section-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visual-box {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 40px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  box-shadow: 8px 8px 0px #1875ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.visual-box:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px #1875ff;
+}
+
+.visual-box.alt {
+  box-shadow: 8px 8px 0px #000;
+}
+
+.visual-box.alt:hover {
+  box-shadow: 12px 12px 0px #000;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  background: rgba(24, 117, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.visual-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.visual-lines .line {
+  height: 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+.visual-lines .line:nth-child(1) {
+  width: 100%;
+}
+
+.visual-lines .line:nth-child(2) {
+  width: 80%;
+}
+
+.visual-lines .line:nth-child(3) {
+  width: 60%;
+}
+
+.quote-box {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 20px;
   text-align: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+}
+
+.quote-box p {
+  margin: 0;
+  font-style: italic;
+  color: #666;
+  font-size: 16px;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-tag {
+  display: inline-block;
+  background: rgba(24, 117, 255, 0.1);
+  color: #1875ff;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.section-tag.light {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.section-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
 }
 
 .paragraph-text1,
 .paragraph-text2 {
-  line-height: 1.7rem;
+  line-height: 1.8;
+  color: #555;
+  font-size: 16px;
+  margin: 0;
 }
 
-/* Container for the signup section */
-.third-div {
+.feature-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chip {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  border-color: #1875ff;
+  color: #1875ff;
+}
+
+/* ========== Signup Section ========== */
+.signup-section {
+  background: linear-gradient(135deg, #1875ff 0%, #0f63dd 100%);
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-container {
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding: 60px 24px;
-  background: #ffffff;
-}
-
-.third-div h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #000000;
   text-align: center;
-  margin: 0;
-  max-width: 600px;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Input box styling */
+.signup-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0;
+}
+
+.signup-content p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  margin: 0;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
 .inputbox {
+  flex: 1;
   background: #ffffff;
-  border: 2px solid #000000;
+  border: 2px solid #fff;
   border-radius: 8px;
   padding: 14px 20px;
   font-size: 16px;
   color: #000000;
   outline: none;
   transition: all 0.3s ease;
-  box-shadow: 4px 4px 0px #000000;
-  width: 100%;
-  max-width: 400px;
 }
 
 .inputbox::placeholder {
@@ -69,29 +358,24 @@
 }
 
 .inputbox:focus {
-  border-color: #000000;
-  box-shadow: 6px 6px 0px #000000;
-  transform: translate(-2px, -2px);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
-/* Button styling */
 .signupbtn {
-  background: #1875ff;
+  background: #000;
   color: #ffffff;
-  border: 2px solid #1875ff;
+  border: 2px solid #000;
   border-radius: 8px;
-  padding: 14px 32px;
+  padding: 14px 28px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 4px 4px 0px #1875ff;
   position: relative;
   overflow: hidden;
-  display: inline-block;
+  white-space: nowrap;
 }
 
-/* Button text span (for arrow animation) */
 .signupbtn span {
   cursor: pointer;
   display: inline-block;
@@ -99,9 +383,8 @@
   transition: 0.4s;
 }
 
-/* Arrow that appears on hover */
 .signupbtn span::after {
-  content: "→";
+  content: "\2192";
   position: absolute;
   opacity: 0;
   top: 0;
@@ -111,14 +394,12 @@
 }
 
 .signupbtn:hover {
-  background: #0f63dd;
-  color: #ffffff;
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #1875ff;
+  background: #333;
+  transform: translateY(-2px);
 }
 
 .signupbtn:hover span {
-  padding-right: 2.2em;
+  padding-right: 2em;
 }
 
 .signupbtn:hover span::after {
@@ -127,21 +408,409 @@
 }
 
 .signupbtn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px #1875ff;
+  transform: translateY(0);
 }
 
-/* Responsive design */
+.form-note {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin: 0;
+}
+
+.signup-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.deco-circle {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.deco-circle:first-child {
+  top: -100px;
+  right: -50px;
+}
+
+.deco-circle.small {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  left: 10%;
+}
+
+/* Color classes */
+.t1-color {
+  color: #fff;
+}
+
+.t2-color,
+.t3-color {
+  color: #1875ff;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 350px;
+    height: 300px;
+  }
+
+  .section-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .section-grid.reverse {
+    direction: ltr;
+  }
+
+  .content-section {
+    padding: 60px 40px;
+  }
+
+  .visual-box {
+    width: 250px;
+    height: 250px;
+  }
+}
+
 @media (max-width: 768px) {
-  .third-div h1 {
-    font-size: 24px;
+  .hero-section {
+    padding: 40px 20px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .stat-item {
+    min-width: 80px;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .stat-number {
+    font-size: 22px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .hero-visual {
+    height: 220px;
+    max-width: 300px;
+  }
+
+  .floating-card {
+    padding: 10px 14px;
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .card-icon {
+    font-size: 18px;
+  }
+
+  .card-1 {
+    top: 10px;
+    left: 10px;
+  }
+
+  .card-2 {
+    top: 80px;
+    right: 0;
+  }
+
+  .card-3 {
+    bottom: 20px;
+    left: 30px;
+  }
+
+  .content-section {
+    padding: 40px 20px;
+  }
+
+  .section-content h2 {
+    font-size: 26px;
+  }
+
+  .paragraph-text1,
+  .paragraph-text2 {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .visual-box {
+    width: 220px;
+    height: 220px;
+    padding: 24px;
+  }
+
+  .signup-section {
+    padding: 50px 20px;
+  }
+
+  .signup-content h2 {
+    font-size: 26px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
   }
 
   .inputbox {
-    max-width: 100%;
+    width: 100%;
+  }
+
+  .signupbtn {
+    width: 100%;
+  }
+
+  .feature-chips {
+    justify-content: center;
+  }
+
+  .chip {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 
-.t1-color, .t2-color, .t3-color{ 
-  color: #1875ff;
+@media (max-width: 480px) {
+  .learn-more-page {
+    overflow-x: hidden;
+  }
+
+  .hero-section {
+    padding: 30px 16px;
+    gap: 30px;
+  }
+
+  .hero-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .hero-stats {
+    gap: 12px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  /* Keep hero visual visible but compact */
+  .hero-visual {
+    height: 180px;
+    max-width: 280px;
+  }
+
+  .floating-card {
+    padding: 8px 12px;
+    font-size: 11px;
+    box-shadow: 3px 3px 0px #000;
+  }
+
+  .card-icon {
+    font-size: 16px;
+  }
+
+  .card-1 {
+    top: 5px;
+    left: 5px;
+  }
+
+  .card-2 {
+    top: 65px;
+    right: 0;
+  }
+
+  .card-3 {
+    bottom: 10px;
+    left: 20px;
+  }
+
+  .content-section {
+    padding: 30px 16px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .section-content h2 {
+    font-size: 22px;
+  }
+
+  .paragraph-text1,
+  .paragraph-text2 {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .section-grid {
+    gap: 30px;
+  }
+
+  .visual-box {
+    width: 180px;
+    height: 180px;
+    padding: 20px;
+    box-shadow: 5px 5px 0px #1875ff;
+  }
+
+  .visual-box.alt {
+    box-shadow: 5px 5px 0px #000;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .visual-lines .line {
+    height: 10px;
+  }
+
+  .quote-box {
+    padding: 12px;
+  }
+
+  .quote-box p {
+    font-size: 13px;
+  }
+
+  .feature-chips {
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .signup-section {
+    padding: 40px 16px;
+  }
+
+  .signup-container {
+    gap: 24px;
+  }
+
+  .signup-content h2 {
+    font-size: 22px;
+  }
+
+  .signup-content p {
+    font-size: 14px;
+  }
+
+  .inputbox {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .signupbtn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .form-note {
+    font-size: 11px;
+  }
+
+  .deco-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .deco-circle.small {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .hero-visual {
+    height: 150px;
+    max-width: 240px;
+  }
+
+  .floating-card {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .card-icon {
+    font-size: 14px;
+  }
+
+  .section-content h2 {
+    font-size: 20px;
+  }
+
+  .visual-box {
+    width: 160px;
+    height: 160px;
+    padding: 16px;
+  }
+
+  .icon-circle {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .signup-content h2 {
+    font-size: 20px;
+  }
 }

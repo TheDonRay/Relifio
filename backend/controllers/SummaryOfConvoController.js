@@ -19,7 +19,7 @@ const SummaryOfConversation = async (req, res) => {
     try { 
         const { sessionId } = req.body;  
         // set up basic validation case here in the backend  
-
+        
         //also implement the AI implementation
 
     } catch { 
