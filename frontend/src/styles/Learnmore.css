@@ -2,6 +2,14 @@
 .learn-more-page {
   min-height: 100vh;
   background: #fafafa;
+  overflow-x: hidden;
+}
+
+/* Global box-sizing for all elements */
+.learn-more-page *,
+.learn-more-page *::before,
+.learn-more-page *::after {
+  box-sizing: border-box;
 }
 
 /* ========== Hero Section ========== */
@@ -332,6 +340,7 @@
   align-items: center;
   gap: 16px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .input-wrapper {
@@ -339,6 +348,7 @@
   gap: 12px;
   width: 100%;
   max-width: 500px;
+  box-sizing: border-box;
 }
 
 .inputbox {
@@ -466,6 +476,9 @@
 
   .hero-content {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-stats {
@@ -487,6 +500,11 @@
     direction: ltr;
   }
 
+  .section-content {
+    align-items: center;
+    text-align: center;
+  }
+
   .content-section {
     padding: 60px 40px;
   }
@@ -494,12 +512,19 @@
   .visual-box {
     width: 250px;
     height: 250px;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 768px) {
   .hero-section {
     padding: 40px 20px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-title {
@@ -511,10 +536,14 @@
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
+    position: relative;
+    z-index: 10;
+    width: 100%;
   }
 
   .stat-item {
     min-width: 80px;
+    align-items: center;
   }
 
   .stat-divider {
@@ -527,40 +556,21 @@
 
   .stat-label {
     font-size: 11px;
+    text-align: center;
   }
 
+  /* Hide floating cards on mobile to prevent overlap */
   .hero-visual {
-    height: 220px;
-    max-width: 300px;
-  }
-
-  .floating-card {
-    padding: 10px 14px;
-    font-size: 12px;
-    gap: 8px;
-  }
-
-  .card-icon {
-    font-size: 18px;
-  }
-
-  .card-1 {
-    top: 10px;
-    left: 10px;
-  }
-
-  .card-2 {
-    top: 80px;
-    right: 0;
-  }
-
-  .card-3 {
-    bottom: 20px;
-    left: 30px;
+    display: none;
   }
 
   .content-section {
     padding: 40px 20px;
+  }
+
+  .section-content {
+    align-items: center;
+    text-align: center;
   }
 
   .section-content h2 {
@@ -577,6 +587,7 @@
     width: 220px;
     height: 220px;
     padding: 24px;
+    margin: 0 auto;
   }
 
   .signup-section {
@@ -587,8 +598,17 @@
     font-size: 26px;
   }
 
+  .signup-form {
+    width: 100%;
+    padding: 0 20px;
+  }
+
   .input-wrapper {
     flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0;
   }
 
   .inputbox {
@@ -610,13 +630,9 @@
 }
 
 @media (max-width: 480px) {
-  .learn-more-page {
-    overflow-x: hidden;
-  }
-
   .hero-section {
     padding: 30px 16px;
-    gap: 30px;
+    gap: 24px;
   }
 
   .hero-badge {
@@ -641,35 +657,9 @@
     font-size: 20px;
   }
 
-  /* Keep hero visual visible but compact */
+  /* Hide floating cards on mobile */
   .hero-visual {
-    height: 180px;
-    max-width: 280px;
-  }
-
-  .floating-card {
-    padding: 8px 12px;
-    font-size: 11px;
-    box-shadow: 3px 3px 0px #000;
-  }
-
-  .card-icon {
-    font-size: 16px;
-  }
-
-  .card-1 {
-    top: 5px;
-    left: 5px;
-  }
-
-  .card-2 {
-    top: 65px;
-    right: 0;
-  }
-
-  .card-3 {
-    bottom: 10px;
-    left: 20px;
+    display: none;
   }
 
   .content-section {
@@ -739,6 +729,7 @@
 
   .signup-container {
     gap: 24px;
+    padding: 0;
   }
 
   .signup-content h2 {
@@ -747,11 +738,21 @@
 
   .signup-content p {
     font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .signup-form {
+    padding: 0 16px;
+  }
+
+  .input-wrapper {
+    padding: 0;
+    max-width: 100%;
   }
 
   .inputbox {
     padding: 12px 16px;
-    font-size: 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 
   .signupbtn {
@@ -776,26 +777,34 @@
 
 /* Extra small screens */
 @media (max-width: 360px) {
+  .hero-section {
+    padding: 24px 12px;
+  }
+
   .hero-title {
     font-size: 22px;
   }
 
-  .hero-visual {
-    height: 150px;
-    max-width: 240px;
-  }
-
-  .floating-card {
-    padding: 6px 10px;
-    font-size: 10px;
-  }
-
-  .card-icon {
+  .hero-subtitle {
     font-size: 14px;
+  }
+
+  /* Keep floating cards hidden on small screens */
+  .hero-visual {
+    display: none;
+  }
+
+  .content-section {
+    padding: 24px 12px;
   }
 
   .section-content h2 {
     font-size: 20px;
+  }
+
+  .paragraph-text1,
+  .paragraph-text2 {
+    font-size: 13px;
   }
 
   .visual-box {
@@ -810,7 +819,23 @@
     font-size: 20px;
   }
 
+  .signup-section {
+    padding: 30px 12px;
+  }
+
   .signup-content h2 {
     font-size: 20px;
+  }
+
+  .signup-form {
+    padding: 0 12px;
+  }
+
+  .inputbox {
+    padding: 10px 14px;
+  }
+
+  .signupbtn {
+    padding: 10px 20px;
   }
 }
