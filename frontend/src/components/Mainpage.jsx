@@ -131,7 +131,7 @@ export default function MainPage() {
 
       const responseFromBackend = await SummaryBackend.json();
       // update the conversationSummary to hold the summary data from the backend.
-      ConversationSummary(responseFromBackend);
+      ConversationSummary(responseFromBackend.AiConvoSummary);
       console.log("Summary received:", responseFromBackend);
 
     } catch (error) {
@@ -260,7 +260,7 @@ export default function MainPage() {
               <h3>Your Chapter Summary</h3>
             </div>
             <div className="summary-content">
-              <p>{summary}</p>
+              <p>{summary}</p> {/*here is where we actually upload the backend response to the frontend. */}
             </div>
             <div className="summary-footer">
               <span>This chapter has been saved to your journey</span>
