@@ -12,8 +12,8 @@ app.use(express.json());
 
 // import routes
 const signupRoute = require("./routes/signedup.js");
-const userConvo = require("./routes/Userconversation.js"); 
-const userSummaryConversation = require('./routes/UserSummaryConversation.js'); 
+const userConvo = require("./routes/Userconversation.js");
+const userSummaryConversation = require("./routes/UserSummaryConversation.js");
 
 app.get("/", (req, res) => {
   res.json({
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 // call the routes here.
 app.use("/api", signupRoute);
-app.use("/api", userConvo); 
-app.use('/api', userSummaryConversation); 
+app.use("/api", userConvo);
+app.use("/api", userSummaryConversation);
 
 module.exports = app;
