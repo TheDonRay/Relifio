@@ -11,7 +11,7 @@ const ConversationSummary = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 10,
-      maxlength: 5000,
+      maxlength: 3000,
     },
   },
   {
