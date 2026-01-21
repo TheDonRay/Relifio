@@ -460,22 +460,27 @@
   padding: 16px;
   box-shadow: 4px 4px 0px #000;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .input-form {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .input-wrapper {
   display: flex;
   gap: 12px;
   align-items: flex-end;
+  width: 100%;
 }
 
 .chat-input {
   flex: 1;
+  min-width: 0;
+  width: 100%;
   padding: 14px 18px;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
@@ -485,6 +490,7 @@
   resize: none;
   max-height: 150px;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
 .chat-input:focus {
@@ -644,11 +650,25 @@
     padding: 12px;
     box-shadow: none;
     border: 2px solid #000;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input-form {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    width: 100%;
   }
 
   .chat-input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
     padding: 12px 14px;
     font-size: 16px; /* Prevents zoom on iOS */
+    box-sizing: border-box;
   }
 
   .send-btn {
@@ -811,15 +831,24 @@
     box-shadow: none;
   }
 
+  .input-form {
+    width: 100%;
+  }
+
   .input-wrapper {
     gap: 8px;
+    width: 100%;
   }
 
   .chat-input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
     padding: 10px 12px;
     font-size: 16px;
     border-radius: 10px;
     min-height: 44px;
+    box-sizing: border-box;
   }
 
   .send-btn {
@@ -975,17 +1004,32 @@
   .input-area {
     padding: 8px;
     border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input-form {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    width: 100%;
   }
 
   .chat-input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
     padding: 8px 10px;
     min-height: 40px;
+    box-sizing: border-box;
   }
 
   .send-btn {
     width: 40px;
     height: 40px;
     min-width: 40px;
+    flex-shrink: 0;
   }
 
   .send-icon {
@@ -1093,10 +1137,31 @@
     padding: 6px 8px;
   }
 
+  .input-area {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input-form {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    width: 100%;
+  }
+
+  .chat-input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
   .send-btn {
     width: 36px;
     height: 36px;
     min-width: 36px;
+    flex-shrink: 0;
   }
 }
 
