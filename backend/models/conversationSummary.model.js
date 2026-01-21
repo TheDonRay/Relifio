@@ -7,7 +7,7 @@ const ConversationSummary = new mongoose.Schema(
             required: true, 
             index: true,
         }, 
-        ConversationSummary: { 
+        ConvoSummary: { 
             type: String, 
             required: true, 
             minlength: 10, 
