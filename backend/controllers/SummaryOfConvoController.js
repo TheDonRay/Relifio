@@ -35,10 +35,24 @@ const SummaryOfConversation = async (req, res) => {
         console.log(UsersConvo);  
         //now we can send it to the AI implementation 
         //Ai implementation later.  
+        const AIsummary = await client.chat.completions.create(
+            { 
+            model: 'gpt-5-nano', 
+            message: 'you are a therapist summarize the conversation a user has just had about what they are facing'
+            },  
+            { 
+                content: 'ai', 
+                message: [{ConvoSummary: UsersConvo}]
+            },
+    ); 
+    res.send({ AiConvoSummary: AIsummary.choices[0].message.content }); 
 
-
-    } catch { 
-        // error handling 
+    } catch (error) { 
+        // error handling  
+        console.error('error recieving sessionId and retrieving data', error); 
+        return res.status(500).json({ 
+            Error: error.message
+        }); 
     }
 } 
 
