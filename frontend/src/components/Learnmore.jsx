@@ -30,8 +30,13 @@ export default function LearnMore() {
 
   const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const userSignup = async (event) => {
-    event.preventDefault();
+  const checkValidEmail = (email) => {
+    const validemail = emailregex.test(email);
+    if (!validemail) {
+      alert("That email doesn't look complete. Check it and try again, like name@example.com.");
+    }
+    return validemail; // returns the email itself.
+  };
 
     if (!emailregex.test(email)) {
       setStatus("error");
@@ -50,123 +55,183 @@ export default function LearnMore() {
         },
         body: JSON.stringify({ email }),
       });
-
+      // only treat it as a signup if the backend actually accepted it
       if (!sendUserdata.ok) {
         throw new Error(`HTTP error! status: ${sendUserdata.status}`);
       }
-
+      // set the result now
       const result = await sendUserdata.json();
       console.log("User Signed up details:", result);
-      setStatus("success");
-      setStatusMessage(`You're on the list. We'll email ${email} when early access opens.`);
+      // clear it once its sent to the backend here
+      alert("You're on the list. We'll email you when there's Relifio news.");
       userEmail("");
     } catch (error) {
       console.error("There was an error sending data to user", error);
-      setStatus("error");
-      setStatusMessage("Your email wasn't saved because the server couldn't be reached. Try again in a moment.");
+      alert("We couldn't sign you up just now. Check your connection and try again.");
     }
   };
 
   return (
-    <div className="about">
-      <SiteHeader />
-
-      <main className="about-main">
-        <header className="about-hero">
-          <h1>A place to put what you're carrying.</h1>
-          <p className="about-lede">
-            Relifio is an AI companion for emotional support. You talk, it listens, and each
-            conversation becomes a chapter in a timeline of your growth.
+    <div className="learn-more-page">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <span className="hero-badge">AI emotional support</span>
+          <h1 className="hero-title">
+            Your Journey to <span className="highlight">Self-Discovery</span>
+          </h1>
+          <p className="hero-subtitle">
+            Talk through what's on your mind. When you're done, Relifio turns
+            the conversation into a chapter of your story.
           </p>
-        </header>
+          <div className="hero-stats">
+            <div className="stat-item">
+              <span className="stat-number">0</span>
+              <span className="stat-label">Accounts needed</span>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <span className="stat-number">1</span>
+              <span className="stat-label">Chapter per conversation</span>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <span className="stat-number">Any time</span>
+              <span className="stat-label">Start when it hits</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="floating-card card-1">
+            <span className="card-icon">&#128218;</span>
+            <span>Life Chapters</span>
+          </div>
+          <div className="floating-card card-2">
+            <span className="card-icon">&#128161;</span>
+            <span>Breakthroughs</span>
+          </div>
+          <div className="floating-card card-3">
+            <span className="card-icon">&#127942;</span>
+            <span>Milestones</span>
+          </div>
+        </div>
+      </section>
 
-        <section className="about-section" aria-labelledby="how-heading">
-          <h2 id="how-heading">How a chapter forms</h2>
-          <ol className="steps">
-            {steps.map((step, i) => (
-              <li key={step.title} className="step">
-                <span className="step-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
+      {/* What is Relifio Section */}
+      <section className="content-section what-section">
+        <div className="section-grid">
+          <div className="section-visual">
+            <div className="visual-box">
+              <div className="icon-circle">
+                <span>&#129504;</span>
+              </div>
+              <div className="visual-lines">
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
+            </div>
+          </div>
+          <div className="section-content">
+            <span className="section-tag">About Us</span>
+            <h2>
+              What is <span className="t3-color">Relifio?</span>
+            </h2>
+            <p className="paragraph-text1">
+              Relifio is a place to talk through how you're feeling with an AI
+              that listens without judgment. Unlike a regular chatbot, the
+              conversation doesn't just disappear: when you end a session,
+              Relifio summarizes it into a "life chapter" that captures what you
+              worked through, whether it's a challenge, a breakthrough, a
+              breakup, or a milestone.
+            </p>
+            <p className="paragraph-text1">
+              Relifio isn't therapy and isn't a replacement for a professional.
+              If you're in crisis or thinking about hurting yourself, call or
+              text 988 in the US, or contact your local emergency number.
+            </p>
+            <div className="feature-chips">
+              <span className="chip">AI-Powered</span>
+              <span className="chip">Judgment-free</span>
+              <span className="chip">Life Chapters</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section className="about-section prose" aria-labelledby="what-heading">
-          <h2 id="what-heading">What Relifio is</h2>
-          <p>
-            Relifio offers on-demand emotional support through conversations in a safe,
-            judgment-free space. Unlike a chatbot that forgets you or a journal that only stores
-            words, it turns each conversation into a structured chapter: the challenges, the
-            breakthroughs, and the milestones.
-          </p>
-          <p>
-            You can revisit those chapters whenever you want perspective, whether it's an
-            achievement, a breakup, or a hard week. Looking back shows the growth that often
-            happens without you noticing.
-          </p>
-        </section>
+      {/* Why Relifio Section */}
+      <section className="content-section why-section">
+        <div className="section-grid reverse">
+          <div className="section-content">
+            <span className="section-tag">Our Mission</span>
+            <h2>
+              Why <span className="t2-color">Relifio?</span>
+            </h2>
+            <p className="paragraph-text2">
+              Because reassurance matters. Even with friends and a supportive
+              family, there are moments when you still feel alone—and I've
+              experienced that firsthand. I often found myself turning to AI just
+              to express how I felt, whether through quick voice messages or chat.
+            </p>
+            <p className="paragraph-text2">
+              That's when I realized there was no platform designed to meaningfully
+              hold these moments. So I'm creating Relifio: a place where your thoughts
+              are not only heard but also tracked, summarized, and transformed into
+              something you can reflect on. Self-reflection is one of the biggest
+              drivers of personal growth, and Relifio turns those isolated moments
+              of expression into a continuous journey of understanding yourself.
+            </p>
+            <div className="feature-chips">
+              <span className="chip">Self-Reflection</span>
+              <span className="chip">Personal Growth</span>
+              <span className="chip">Emotional Support</span>
+            </div>
+          </div>
+          <div className="section-visual">
+            <div className="visual-box alt">
+              <div className="icon-circle">
+                <span>&#128150;</span>
+              </div>
+              <div className="quote-box">
+                <p>"Your thoughts deserve to be heard"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section className="about-section prose founder" aria-labelledby="why-heading">
-          <h2 id="why-heading">Why I built it</h2>
-          <p>
-            Because reassurance matters. Even with friends and a supportive family, there are
-            moments when you still feel alone. I've been there. I often found myself turning to
-            AI just to say how I felt, through quick voice messages or chat.
-          </p>
-          <p>
-            But nothing held on to those moments. So I'm building Relifio: a place where your
-            thoughts are heard, then summarized into something you can reflect on. Self-reflection
-            is one of the biggest drivers of growth, and Relifio turns isolated moments of
-            expression into a continuous story about yourself.
-          </p>
-          <Link to="/Mainpage" className="btn btn-primary">
-            Begin a chapter
-          </Link>
-        </section>
-
-        <section className="signup" aria-labelledby="signup-heading">
-          <h2 id="signup-heading">Get early access</h2>
-          <p>We'll email you once when new features launch. No newsletters.</p>
-          <form className="signup-form" onSubmit={userSignup} noValidate>
-            <label htmlFor="signup-email" className="visually-hidden">
-              Email address
-            </label>
-            <input
-              id="signup-email"
-              className="signup-input"
-              type="email"
-              autoComplete="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => {
-                userEmail(e.target.value);
-                if (status === "error") setStatus("idle");
-              }}
-              aria-invalid={status === "error"}
-              aria-describedby="signup-status"
-            />
-            <button className="btn btn-primary" type="submit" disabled={status === "sending"}>
-              {status === "sending" ? "Joining…" : "Join the list"}
-            </button>
-          </form>
-          <p id="signup-status" className={`signup-status ${status}`} role="status">
-            {statusMessage}
-          </p>
-        </section>
-      </main>
-
-      <footer className="about-footer">
-        <p>
-          Relifio is a support tool, not a replacement for professional care. If you're in
-          crisis, contact your local emergency number or a crisis line.
-        </p>
-      </footer>
+      {/* Signup Section */}
+      <section className="signup-section">
+        <div className="signup-container">
+          <div className="signup-content">
+            <span className="section-tag light">Join the Journey</span>
+            <h2>
+              Stay updated with <span className="t1-color">Relifio!</span>
+            </h2>
+            <p>Relifio is still growing. Leave your email to hear when new features launch.</p>
+          </div>
+          <div className="signup-form">
+            <div className="input-wrapper">
+              <input
+                className="inputbox"
+                type="email"
+                placeholder="Enter your email"
+                aria-label="Email address"
+                value={email}
+                onChange={(e) => userEmail(e.target.value)}
+              />
+              <button className="signupbtn" onClick={userSignup}>
+                <span>Get updates</span>
+              </button>
+            </div>
+            <p className="form-note">We'll only email you about Relifio. No spam.</p>
+          </div>
+        </div>
+        <div className="signup-decoration">
+          <div className="deco-circle"></div>
+          <div className="deco-circle small"></div>
+        </div>
+      </section>
     </div>
   );
 }
