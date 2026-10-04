@@ -70,7 +70,11 @@ web_modules/
 *.tgz
 
 # Yarn Integrity file
-.yarn-integrity
+.yarn-integrity 
+
+# ignore claude 
+/.claude  
+CLAUDE.md 
 
 # dotenv environment variable files
 .env

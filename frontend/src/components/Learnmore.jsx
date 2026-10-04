@@ -38,6 +38,7 @@ export default function LearnMore() {
     return validemail; // returns the email itself.
   };
 
+  const userSignup = async () => {
     if (!emailregex.test(email)) {
       setStatus("error");
       setStatusMessage("Enter an email address like name@example.com.");
