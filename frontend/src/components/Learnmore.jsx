@@ -17,7 +17,7 @@ export default function LearnMore() {
   const checkValidEmail = (email) => {
     const validemail = emailregex.test(email);
     if (!validemail) {
-      alert("Please Enter a valid Email Thank you!");
+      alert("That email doesn't look complete. Check it and try again, like name@example.com.");
     }
     return validemail; // returns the email itself.
   };
@@ -38,14 +38,19 @@ export default function LearnMore() {
         },
         body: JSON.stringify({ email }),
       });
+      // only treat it as a signup if the backend actually accepted it
+      if (!sendUserdata.ok) {
+        throw new Error(`HTTP error! status: ${sendUserdata.status}`);
+      }
       // set the result now
       const result = await sendUserdata.json();
       console.log("User Signed up details:", result);
       // clear it once its sent to the backend here
-      alert("Success! Your email is now signed up");
+      alert("You're on the list. We'll email you when there's Relifio news.");
       userEmail("");
     } catch (error) {
       console.error("There was an error sending data to user", error);
+      alert("We couldn't sign you up just now. Check your connection and try again.");
     }
   };
 
@@ -54,27 +59,28 @@ export default function LearnMore() {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <span className="hero-badge">Mental Wellness Platform</span>
+          <span className="hero-badge">AI emotional support</span>
           <h1 className="hero-title">
             Your Journey to <span className="highlight">Self-Discovery</span>
           </h1>
           <p className="hero-subtitle">
-            Transform your thoughts into meaningful chapters of growth
+            Talk through what's on your mind. When you're done, Relifio turns
+            the conversation into a chapter of your story.
           </p>
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-number">24/7</span>
-              <span className="stat-label">Available Support</span>
+              <span className="stat-number">0</span>
+              <span className="stat-label">Accounts needed</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Private & Secure</span>
+              <span className="stat-number">1</span>
+              <span className="stat-label">Chapter per conversation</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-number">AI</span>
-              <span className="stat-label">Powered Insights</span>
+              <span className="stat-number">Any time</span>
+              <span className="stat-label">Start when it hits</span>
             </div>
           </div>
         </div>
@@ -115,22 +121,21 @@ export default function LearnMore() {
               What is <span className="t3-color">Relifio?</span>
             </h2>
             <p className="paragraph-text1">
-              Relifio is a mental wellness SaaS platform that provides on-demand
-              emotional support through AI-powered therapeutic conversations in a
-              safe, judgment-free space. Unlike traditional chatbots or journaling
-              apps, Relifio transforms each interaction into structured "life
-              chapters," capturing challenges, breakthroughs, and milestones in a
-              meaningful emotional timeline.
+              Relifio is a place to talk through how you're feeling with an AI
+              that listens without judgment. Unlike a regular chatbot, the
+              conversation doesn't just disappear: when you end a session,
+              Relifio summarizes it into a "life chapter" that captures what you
+              worked through, whether it's a challenge, a breakthrough, a
+              breakup, or a milestone.
             </p>
             <p className="paragraph-text1">
-              As a user, you can revisit these chapters anytime to reflect on your
-              growth—whether it's an achievement, a challenge, a breakup, or anything
-              in between. Looking back shows you just how far you've come, highlighting
-              the growth that often happens without you even noticing.
+              Relifio isn't therapy and isn't a replacement for a professional.
+              If you're in crisis or thinking about hurting yourself, call or
+              text 988 in the US, or contact your local emergency number.
             </p>
             <div className="feature-chips">
               <span className="chip">AI-Powered</span>
-              <span className="chip">Safe Space</span>
+              <span className="chip">Judgment-free</span>
               <span className="chip">Life Chapters</span>
             </div>
           </div>
@@ -186,7 +191,7 @@ export default function LearnMore() {
             <h2>
               Stay updated with <span className="t1-color">Relifio!</span>
             </h2>
-            <p>Be the first to know when we launch and get exclusive early access.</p>
+            <p>Relifio is still growing. Leave your email to hear when new features launch.</p>
           </div>
           <div className="signup-form">
             <div className="input-wrapper">
@@ -194,14 +199,15 @@ export default function LearnMore() {
                 className="inputbox"
                 type="email"
                 placeholder="Enter your email"
+                aria-label="Email address"
                 value={email}
                 onChange={(e) => userEmail(e.target.value)}
               />
               <button className="signupbtn" onClick={userSignup}>
-                <span>Sign Up</span>
+                <span>Get updates</span>
               </button>
             </div>
-            <p className="form-note">No spam, ever. Unsubscribe anytime.</p>
+            <p className="form-note">We'll only email you about Relifio. No spam.</p>
           </div>
         </div>
         <div className="signup-decoration">
