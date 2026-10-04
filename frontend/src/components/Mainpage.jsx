@@ -2,10 +2,15 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 require("../styles/Mainpage.css"); 
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_HOSTED_URL; 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_HOSTED_URL;
+
+// same phrases the backend checks, so crisis resources still show if the network fails
+const crisisPattern =
+  /\b(kill(ing)? myself|suicid(e|al)|end (it all|my life)|want to die|don'?t want to (live|be here)|hurt(ing)? myself|self[- ]?harm(ing)?|cut(ting)? myself|overdose|no reason to live|better off dead)\b/i;
 
 export default function MainPage() {
   const [textValue, newTextValue] = useState("");
+  const [showCrisis, setShowCrisis] = useState(false);
   const [messages, setMessages] = useState([]);
   const [sessionId, setSessionId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +55,11 @@ export default function MainPage() {
       const userMessage = textValue.trim();
       console.log("User wrote:", userMessage);
 
+      // show crisis resources immediately, before waiting on the backend
+      if (crisisPattern.test(userMessage)) {
+        setShowCrisis(true);
+      }
+
       // Add user message to UI immediately
       setMessages(prev => [...prev, { sender: 'user', message: userMessage }]);
 
@@ -77,13 +87,18 @@ export default function MainPage() {
           }),
         });
 
+        const res = await sendData.json().catch(() => ({})); // gets response from the backend here
+        console.log("Response from backend:", res);
+
+        // the backend flags risk even when the reply itself failed
+        if (res.crisis) {
+          setShowCrisis(true);
+        }
+
         // Check if response is ok
         if (!sendData.ok) {
           throw new Error(`HTTP error! status: ${sendData.status}`);
         }
-
-        const res = await sendData.json(); // gets response from the backend here
-        console.log("Response from backend:", res);
 
         // Add AI response to UI
         if (res.success && res.airesponse) {
@@ -97,10 +112,12 @@ export default function MainPage() {
 
       } catch (error) {
         console.error("Error sending data to backend:", error);
-        setMessages(prev => [...prev, {
+        // take the unsent message out of the thread and put it back in the box
+        setMessages(prev => [...prev.slice(0, -1), {
           sender: 'ai',
-          message: 'Sorry, something went wrong. Please try again.'
+          message: "Your message didn't send. It's back in the box below, so you can try again when your connection is back."
         }]);
+        newTextValue(userMessage);
       } finally {
         setIsLoading(false);
       }
@@ -270,6 +287,29 @@ export default function MainPage() {
           </div>
         )}
 
+        {/* Crisis Resources */}
+        {showCrisis && (
+          <section className="crisis-card" role="alert" aria-labelledby="crisis-title">
+            <h3 id="crisis-title">You don't have to go through this alone.</h3>
+            <p>
+              If you're thinking about hurting yourself or you're in danger,
+              please reach a real person now. You can keep talking here too.
+            </p>
+            <div className="crisis-actions">
+              <a className="crisis-btn crisis-btn-primary" href="tel:988">Call 988</a>
+              <a className="crisis-btn" href="sms:988">Text 988</a>
+            </div>
+            <p className="crisis-note">
+              988 is the US Suicide &amp; Crisis Lifeline, free and open 24/7.
+              Outside the US, call your local emergency number or find a line at{" "}
+              <a href="https://findahelpline.com" target="_blank" rel="noreferrer">findahelpline.com</a>.
+            </p>
+            <button type="button" className="crisis-dismiss" onClick={() => setShowCrisis(false)}>
+              Hide this
+            </button>
+          </section>
+        )}
+
         {/* Input Area */}
         <div className="input-area">
           <form onSubmit={buttonsubmission} className="input-form">
@@ -292,6 +332,10 @@ export default function MainPage() {
               </button>
             </div>
             <p className="input-hint">Press Enter to send, Shift+Enter for new line</p>
+            <p className="care-notice">
+              Relifio is an AI, not a therapist. In crisis? Call or text{" "}
+              <a href="tel:988">988</a> (US) or your local emergency number.
+            </p>
           </form>
         </div>
       </div>

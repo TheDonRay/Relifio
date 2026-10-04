@@ -31,7 +31,7 @@ Not a journaling app (you don't have to write alone) and not a generic chatbot (
 - Shipped: AI chat, per-session stored conversation, on-demand session summary ("chapter"), waitlist email signup.
 - Not shipped and **not to be claimed** anywhere: accounts/authentication, encryption, "100% private & secure", data export, cross-chapter pattern tracking, a browsable timeline of past chapters. The README and current Learn More copy overstate these; that copy needs correcting, not echoing.
 - Terminology: "chapter" / "life chapter" = a summarized session. "Begin a chapter" = start a conversation.
-- Safety (required): Relifio is not therapy, a therapist, or a medical service, and must say so plainly. When someone may be at risk, the product must surface crisis resources (e.g. 988 in the US). **Open:** this crisis path is not yet implemented, and region coverage for resources is undecided.
+- Safety (required): Relifio is not therapy, a therapist, or a medical service, and must say so plainly. When someone may be at risk, the product must surface crisis resources (e.g. 988 in the US). Implemented in the chat: a standing "AI, not a therapist" notice, and a crisis panel (call/text 988, findahelpline.com for outside the US) triggered by a keyword check in the browser plus a keyword and OpenAI moderation check on the server. **Open:** dedicated resources for regions beyond the US.
 
 ## Brand Commitments
 
