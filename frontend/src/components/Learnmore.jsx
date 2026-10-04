@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState } from "react"; 
 require("../styles/Learnmore.css");
 
 // set up basic stuff here
@@ -7,7 +7,7 @@ require("../styles/Learnmore.css");
 export default function LearnMore() {
   // add email state
   const [email, userEmail] = useState("");
-  const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
+  const REACT_BACKEND_URL = process.env.REACT_APP_BACKEND_HOSTED_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
   //TODO helper function that checks for a valid email.

@@ -1,6 +1,8 @@
-import React from "react";
+import React from "react"; 
 import { useState, useRef, useEffect } from "react";
-require("../styles/Mainpage.css");
+require("../styles/Mainpage.css"); 
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_HOSTED_URL; 
 
 export default function MainPage() {
   const [textValue, newTextValue] = useState("");
@@ -10,7 +12,7 @@ export default function MainPage() {
   const [summary, ConversationSummary] = useState("");
   const [summaryLoad, summaryIsLoading] = useState(false);
   const textareaRef = useRef(null);
-  const messagesEndRef = useRef(null); // NEW: For auto-scroll
+  const messagesEndRef = useRef(null); // NEW: For auto-scroll 
 
   // Generate or retrieve sessionId when component loads
   useEffect(() => {
@@ -64,7 +66,7 @@ export default function MainPage() {
       try {
         console.log("Sending to backend:", { message: userMessage, sessionId });
 
-        const sendData = await fetch(`http://localhost:6700/api/userconvo`, {
+        const sendData = await fetch(`${BACKEND_URL}/api/userconvo`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +119,7 @@ export default function MainPage() {
     try {
       console.log('Requesting summary for session', sessionId);
       // now we need to set up the backend to recieve the session ID as a post request because its sending data to the backend.
-      const SummaryBackend = await fetch(`http://localhost:6700/api/convosummary`, {
+      const SummaryBackend = await fetch(`${BACKEND_URL}/api/convosummary`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
