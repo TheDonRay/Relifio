@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "bounce",
+        "createdAt": "2026-10-04T18:07:56.528Z",
+        "reason": "Claude triage: pre-existing typing-indicator keyframe named 'bounce' in Mainpage.css uses ease-in-out translateY hop, no elastic easing"
+      }
+    ]
+  }
+}
