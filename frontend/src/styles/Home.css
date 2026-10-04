@@ -1,53 +1,35 @@
-/* ============ Global ============ */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f7f9fc;
-}
-
 /* ============ Layout ============ */
-.home-wrapper {
-  min-height: 100vh; /* full viewport height */
+.home {
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  font-family: "Plus Jakarta Sans", sans-serif;
+  flex-direction: column;
 }
 
-.container1 {
-  width: 50%;
-  max-width: 800px;
-  text-align: center;
+.home-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 120px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(24px, 6vh, 80px) var(--gutter) clamp(48px, 10vh, 120px);
 }
 
-/* ============ Title & Paragraph ============ */
-.title {
-  white-space: normal;
-  word-wrap: break-word;
-  color: #000000;
-  line-height: 1.2;
-  word-spacing: 2px;
-  max-width: 100%;
-  font-size: clamp(1.75rem, 5vw + 1rem, 3.5rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+/* ============ Intro ============ */
+.home-title {
+  font-size: var(--step-3);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  max-width: 16ch;
 }
 
-.title .word,
-.paragraph-style .word {
+.home-title .word {
   display: inline-block;
   white-space: nowrap;
-}
-
-/*Implement a similar break style for the paragraph elements as well*/
-.paragraph-style {
-  word-spacing: 2px;
-  white-space: normal; /* ensures wrapping */
-  overflow-wrap: normal; /* prevents long words from breaking layout */
-  word-break: normal; /* forces wrap inside long spans */
-  display: block; /*added a change here */
 }
 
 /* Each character span created in JS */
@@ -55,114 +37,129 @@ body {
   display: inline-block;
   filter: blur(8px);
   opacity: 0;
-  animation: clearBlur 0.5s forwards;
-  white-space: inherit; /* preserves spacing added a change here to see if it would work,*/
+  animation: clearBlur 0.6s forwards;
 }
 
-/* Highlight color for specific words */
-.highlight {
-  color: #1875ff;
-}
-
-/* Blur → clear animation */
 @keyframes clearBlur {
-  0% {
-    filter: blur(8px);
-    opacity: 0;
-  }
-  100% {
-    filter: blur(0px);
+  to {
+    filter: blur(0);
     opacity: 1;
   }
 }
 
-/* ============ Buttons ============ */
-.buttons-row {
-  margin-top: 1.5rem;
-  display: inline-flex;
-  gap: 0.75rem;
-  font-family: "Plus Jakarta Sans", sans-serif;
+.home-lede {
+  margin-top: 24px;
+  max-width: 34ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--moss);
 }
 
-.btn1,
-.btn2 {
-  font-family: inherit;
-  display: inline-block;
-  border-radius: 10px;
-  border: none;
-  background: #1875ff;
-  color: white;
-  text-align: center;
-  font-size: 13px;
-  box-shadow: 0px 14px 56px -11px #1875ff;
-  width: 12em;
-  padding: 1em;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
 }
 
-/* Button text span (for arrow animation) */
-.btn1 span,
-.btn2 span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.4s;
+/* ============ Table of contents ============ */
+.contents {
+  background: var(--page);
+  border-radius: var(--radius-sm);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow:
+    0 1px 0 var(--line),
+    0 24px 48px -32px rgba(34, 48, 44, 0.45);
 }
 
-/* Arrow that appears on hover */
-.btn1 span::after,
-.btn2 span::after {
-  content: "→";
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -18px;
-  transition: 0.4s;
+.contents-heading {
+  font-size: var(--step-1);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--moss);
+  margin-bottom: 24px;
+}
+
+.contents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--serif);
+  font-size: var(--step-0);
+}
+
+.contents-row {
+  display: grid;
+  grid-template-columns: 2.5em minmax(0, max-content) minmax(24px, 1fr) auto;
+  align-items: last baseline;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.contents-num {
+  color: var(--moss);
+  font-size: var(--step--1);
+  font-variant-numeric: oldstyle-nums;
+}
+
+.contents-title {
+  color: var(--ink);
+}
+
+.contents-leader {
+  border-bottom: 2px dotted var(--line);
+  transform: translateY(-4px);
+}
+
+.contents-page {
+  color: var(--moss);
+  font-variant-numeric: oldstyle-nums tabular-nums;
+}
+
+.contents-next .contents-title {
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--lamp);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.contents-next .contents-title:hover {
+  color: var(--moss);
+}
+
+.contents-next .contents-page {
+  color: var(--lamp-text);
   font-weight: 600;
 }
 
-/* Hover effects */
-.btn1:hover,
-.btn2:hover {
-  background: #0f63dd;
-  box-shadow: 0px 18px 60px -15px #1875ff;
-  transform: translateY(-2px);
+.contents-note {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--wash);
+  font-size: var(--step--1);
+  color: var(--moss);
+  max-width: 44ch;
 }
 
-.btn1:hover span,
-.btn2:hover span {
-  padding-right: 2.2em;
+/* ============ Responsive ============ */
+@media (max-width: 860px) {
+  .home-main {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .home-title {
+    max-width: 14ch;
+  }
 }
 
-.btn1:hover span::after,
-.btn2:hover span::after {
-  opacity: 1;
-  right: 0;
-}
-
-/* ============ Responsive tweaks ============ */
-@media (max-width: 768px) {
-  .container1 {
-    width: 85%;
+@media (max-width: 480px) {
+  .home-actions .btn {
+    flex: 1 1 100%;
   }
 
-  .title {
-    font-size: 2rem;
-  }
-
-  .buttons-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btn1,
-  .btn2 {
-    width: 100%;
+  .contents-row {
+    grid-template-columns: 2em minmax(0, max-content) minmax(12px, 1fr) auto;
   }
 }

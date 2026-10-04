@@ -1,17 +1,33 @@
 import React from "react";
-import { useState } from "react"; 
-require("../styles/Learnmore.css");
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import SiteHeader from "./SiteHeader.jsx";
 
-// set up basic stuff here
+import "../styles/Learnmore.css";
+
+const steps = [
+  {
+    title: "Talk it through",
+    body: "Write about whatever is on your mind, big or small. Relifio listens and responds without judgment, any time of day.",
+  },
+  {
+    title: "Close the chapter",
+    body: "When you're ready, end the conversation. Relifio summarizes what you talked about, what you felt, and what shifted.",
+  },
+  {
+    title: "Look back",
+    body: "Each summary is saved as a chapter. Over time they show patterns, breakthroughs, and how far you've come.",
+  },
+];
+
 // set up mongoDB database for this one to store signed up emails from people.
 export default function LearnMore() {
-  // add email state
   const [email, userEmail] = useState("");
+  // idle | sending | success | error
+  const [status, setStatus] = useState("idle");
+  const [statusMessage, setStatusMessage] = useState("");
   const REACT_BACKEND_URL = process.env.REACT_APP_BACKEND_HOSTED_URL;
 
-  //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
-  //TODO helper function that checks for a valid email.
-  // Below here this is the email regex used for  a valid email.
   const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const checkValidEmail = (email) => {
@@ -22,14 +38,15 @@ export default function LearnMore() {
     return validemail; // returns the email itself.
   };
 
-  const userSignup = async () => {
-    // base case which calls the helper function here as such which should basically help with email authentication
-    if (!checkValidEmail(email)) {
+    if (!emailregex.test(email)) {
+      setStatus("error");
+      setStatusMessage("Enter an email address like name@example.com.");
       return;
-    } else {
-      console.log("Email looks good moving on with the rest of the code");
     }
-    // Begins the actually fetch of the backend but sending a post request which is the req body
+
+    setStatus("sending");
+    setStatusMessage("");
+
     try {
       const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, {
         method: "POST",

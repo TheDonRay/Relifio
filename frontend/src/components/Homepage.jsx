@@ -1,33 +1,24 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SiteHeader from "./SiteHeader.jsx";
 
-require("../styles/Home.css");
+import "../styles/Home.css";
+
+// Example chapters shown in the hero's table of contents.
+const sampleChapters = [
+  { title: "The week everything felt heavy", page: 3 },
+  { title: "Talking through the breakup", page: 11 },
+  { title: "Saying no without the guilt", page: 18 },
+  { title: "A good morning, finally", page: 26 },
+];
+
+const romanNumerals = ["I", "II", "III", "IV", "V"];
 
 export default function Home() {
   const titleRef = useRef(null);
-  const paragraphRef = useRef(null);
 
-  // initialize the use Navigate here
-  const navigate = useNavigate();
-
-  // Reusable function to animate any text into spans
-  // const animateText = (element, text) => {
-  //   if (!element) return;
-
-  //   element.innerHTML = "";
-  //   text.split("").forEach((char, index) => {
-  //     const span = document.createElement("span");
-
-  //     // keep spaces visible
-  //     // span.textContent = char === " " ? "\u00A0" : char;
-  //     span.textContent = char;
-
-  //     span.style.animationDelay = `${index * 0.06}s`;
-  //     span.classList.add("letter-animate");
-  //     element.appendChild(span);
-  //   });
-  // };
-  const animateText = (element, text, highlightWords = []) => {
+  // Reveal the headline one letter at a time, keeping words unbroken
+  const animateText = (element, text) => {
     if (!element) return;
 
     element.innerHTML = "";
@@ -36,31 +27,19 @@ export default function Home() {
     let index = 0; // to keep animation delay continuous
 
     words.forEach((word, wordIdx) => {
-      // Remove punctuation to check for highlighting
-      const cleanWord = word.toLowerCase().replace(/[.,!?;:—]/g, "");
-      
-      // wrapper for the whole word
       const wordSpan = document.createElement("span");
       wordSpan.classList.add("word");
-      
-      // Check if this word should be highlighted
-      if (highlightWords.includes(cleanWord)) {
-        wordSpan.classList.add("highlight");
-      }
-      
       element.appendChild(wordSpan);
 
-      // each letter inside the word
       [...word].forEach((char) => {
         const span = document.createElement("span");
         span.textContent = char;
-        span.style.animationDelay = `${index * 0.06}s`;
+        span.style.animationDelay = `${index * 0.035}s`;
         span.classList.add("letter-animate");
         wordSpan.appendChild(span);
         index++;
       });
 
-      // add a normal space *between* words
       if (wordIdx !== words.length - 1) {
         element.appendChild(document.createTextNode(" "));
       }
@@ -68,42 +47,57 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const titleText = "Where technology meets empathy.";
-    const paragraphText =
-      "Your thoughts become chapters, Your chapters become the story of you.";
-
-    animateText(titleRef.current, titleText, ["technology", "empathy"]);
-    animateText(paragraphRef.current, paragraphText);
+    animateText(titleRef.current, "Where technology meets empathy.");
   }, []);
 
-  // later set upo the button use navigates
-  // intialize button functions herer as such
-  // learn more button function here
-  function buttonNav1() {
-    navigate("/Learnmore");
-  }
-
-  // second function for navigation to buttnav2
-  function buttonNav2() {
-    navigate("/Mainpage");
-  }
-
   return (
-    <div className="home-wrapper">
-      <div className="container1">
-        <h1 className="title" ref={titleRef}>Where technology meets empathy.</h1>
+    <div className="home">
+      <SiteHeader />
 
-        <p className="paragraph-style" ref={paragraphRef}>Your thoughts become chapters, Your chapters become the story of you.</p>
+      <main className="home-main">
+        <section className="home-intro">
+          <h1 className="home-title" ref={titleRef} aria-label="Where technology meets empathy.">
+            Where technology meets empathy.
+          </h1>
+          <p className="home-lede">
+            Your thoughts become chapters. Your chapters become the story of you.
+          </p>
+          <div className="home-actions">
+            <Link to="/Mainpage" className="btn btn-primary">
+              Begin a chapter
+            </Link>
+            <Link to="/Learnmore" className="btn btn-quiet">
+              How it works
+            </Link>
+          </div>
+        </section>
 
-        <div className="buttons-row">
-          <button className="btn1" onClick={buttonNav1}>
-            <span>Learn More</span>
-          </button>
-          <button className="btn2" onClick={buttonNav2}>
-            <span>Begin a chapter</span>
-          </button>
-        </div>
-      </div>
+        <aside className="contents" aria-label="Example table of contents">
+          <h2 className="contents-heading">Contents</h2>
+          <ol className="contents-list">
+            {sampleChapters.map((chapter, i) => (
+              <li key={chapter.title} className="contents-row">
+                <span className="contents-num">{romanNumerals[i]}</span>
+                <span className="contents-title">{chapter.title}</span>
+                <span className="contents-leader" aria-hidden="true" />
+                <span className="contents-page">{chapter.page}</span>
+              </li>
+            ))}
+            <li className="contents-row contents-next">
+              <span className="contents-num">{romanNumerals[sampleChapters.length]}</span>
+              <Link to="/Mainpage" className="contents-title">
+                Your next chapter
+              </Link>
+              <span className="contents-leader" aria-hidden="true" />
+              <span className="contents-page">33</span>
+            </li>
+          </ol>
+          <p className="contents-note">
+            Every conversation you close is summarized and saved as a chapter you can come back
+            to.
+          </p>
+        </aside>
+      </main>
     </div>
   );
 }
