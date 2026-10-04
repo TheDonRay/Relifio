@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+import { BACKEND_URL } from "../config";
 require("../styles/Mainpage.css");
 
 export default function MainPage() {
@@ -64,7 +65,7 @@ export default function MainPage() {
       try {
         console.log("Sending to backend:", { message: userMessage, sessionId });
 
-        const sendData = await fetch(`http://localhost:6700/api/userconvo`, {
+        const sendData = await fetch(`${BACKEND_URL}/api/userconvo`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +118,7 @@ export default function MainPage() {
     try {
       console.log('Requesting summary for session', sessionId);
       // now we need to set up the backend to recieve the session ID as a post request because its sending data to the backend.
-      const SummaryBackend = await fetch(`http://localhost:6700/api/convosummary`, {
+      const SummaryBackend = await fetch(`${BACKEND_URL}/api/convosummary`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

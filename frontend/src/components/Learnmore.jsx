@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { BACKEND_URL } from "../config";
 require("../styles/Learnmore.css");
 
 // set up basic stuff here
@@ -7,7 +8,6 @@ require("../styles/Learnmore.css");
 export default function LearnMore() {
   // add email state
   const [email, userEmail] = useState("");
-  const REACT_BACKEND_URL = process.env.REACT_APP_API_URL;
 
   //Turns out i didnt need useEffect because the useEffect was triggering the database call every character
   //TODO helper function that checks for a valid email.
@@ -31,7 +31,7 @@ export default function LearnMore() {
     }
     // Begins the actually fetch of the backend but sending a post request which is the req body
     try {
-      const sendUserdata = await fetch(`${REACT_BACKEND_URL}/api/signup`, {
+      const sendUserdata = await fetch(`${BACKEND_URL}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
