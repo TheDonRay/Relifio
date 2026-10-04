@@ -1,13 +1,199 @@
+/* ============ Tokens ============ */
+:root {
+  --haze: #e6ebe8;
+  --page: #fafbf8;
+  --ink: #22302c;
+  --moss: #53695f;
+  --lamp: #e9a93a;
+  --lamp-ink: #2b2208;
+  --lamp-text: #8f600c;
+  --line: #c9d3ce;
+  --wash: #dde4e0;
+  --danger: #a3402f;
+
+  --serif: "Literata", Georgia, serif;
+  --sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+
+  /* Type scale (perfect fourth) */
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.375rem;
+  --step-2: 1.875rem;
+  --step-3: clamp(2.25rem, 4vw + 1rem, 3.75rem);
+
+  --radius-sm: 6px;
+  --radius: 14px;
+  --gutter: clamp(16px, 4vw, 48px);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --haze: #161d1b;
+    --page: #1d2522;
+    --ink: #e4ebe7;
+    --moss: #9fb3aa;
+    --lamp: #f0b955;
+    --lamp-ink: #241b05;
+    --lamp-text: #f0b955;
+    --line: #34413c;
+    --wash: #26302c;
+    --danger: #e98a78;
+    color-scheme: dark;
+  }
+}
+
+/* ============ Base ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  padding: 0;
+}
+
+body {
+  background: var(--haze);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--lamp);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--lamp);
+  color: var(--lamp-ink);
+}
+
+/* ============ Shared pieces ============ */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px var(--gutter);
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.site-nav a {
+  color: var(--moss);
+  text-decoration: none;
+  font-size: var(--step--1);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: var(--step--1);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--page);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--moss);
+}
+
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn-quiet:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
